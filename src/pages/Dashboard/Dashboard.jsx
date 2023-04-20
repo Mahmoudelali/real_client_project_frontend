@@ -7,14 +7,13 @@ import './dashboard.css';
 import { Grid } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
-
 import SettingsSharpIcon from '@mui/icons-material/SettingsSharp';
-
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HomeSharpIcon from '@mui/icons-material/HomeSharp';
 import GroupIcon from '@mui/icons-material/Group';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import PendingIcon from '@mui/icons-material/Pending';
 
 const sideLinks = [
 	{
@@ -38,10 +37,16 @@ const sideLinks = [
 		name: 'Products',
 	},
 	{
+		icon: <PendingIcon />,
+		path: '/admin/dashboard/pending',
+		name: 'Pending',
+	},
+	{
 		icon: <SettingsSharpIcon />,
 		path: '/admin/dashboard/settings',
 		name: 'Settings',
 	},
+	
 ];
 const Dashboard = () => {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(sidebarStatus);
