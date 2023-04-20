@@ -19,8 +19,7 @@ import Settings from './pages/Dashboard/Settings.jsx';
 import AboutUs from './pages/about-us/About-us.jsx';
 import Cart from './pages/cart/Cart.jsx';
 import DashHome from './pages/Dashboard/DashHome';
-
-import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+import Pending from './pages/Dashboard/Pending.jsx';
 
 export const sidebarStatus = React.createContext();
 
@@ -74,6 +73,10 @@ function App() {
 							<Route
 								path="/admin/dashboard/users"
 								element={<Users />}
+							></Route>
+							<Route
+								path="/admin/dashboard/pending"
+								element={<Pending />}
 							></Route>
 						</Route>
 					</Routes>

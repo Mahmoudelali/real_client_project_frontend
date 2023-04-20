@@ -11,8 +11,6 @@
 }
 .active {
 	color: var(--accent) !important;
-	text-decoration: underline !important;
-	font-weight: 900;
 }
 .dashboard-container {
 	position: relative;
@@ -35,7 +33,9 @@
 	-webkit-box-shadow: 6px 5px 33px -6px rgba(64, 64, 64, 1);
 	-moz-box-shadow: 6px 5px 33px -6px rgba(64, 64, 64, 1);
 }
-
+main {
+	padding: 0.5rem;
+}
 @media screen and (min-width: 768px) {
 	.toggle-menu-icon {
 		display: none !important;
@@ -43,6 +43,9 @@
 	.side-bar-container {
 		display: flex !important;
 		width: 12% !important;
+	}
+	main {
+		padding: 1rem 1rem 1rem 14%;
 	}
 }
 .side-bar-container .greetings h1 {
@@ -60,12 +63,35 @@
 }
 
 .side-bar-container a {
+	margin: 5px 0;
+	font-size: 0.9rem;
+	position: relative;
 	text-decoration: none;
 	display: flex;
 	align-items: center;
-	padding: 10px 0;
+	padding: 10px 0 10px 12px;
 	letter-spacing: 1.5px;
+	transition: 0.3s;
 }
+
+.side-bar-container a:hover {
+	color: var(--accent);
+}
+
+.side-bar-container a::before {
+	content: '';
+	position: absolute;
+	top: 10%;
+	left: 0;
+	width: 0;
+	background-color: var(--accent);
+	height: 80%;
+	border-radius: 5px;
+}
+.side-bar-container a:hover::before {
+	width: 2px;
+}
+
 .side-bar-container svg {
 	margin-right: 10px;
 }
