@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useState } from 'react';
 
 // components
 import Home from './pages/home/Home.jsx';
@@ -17,51 +18,67 @@ import Products from './pages/Dashboard/Products.jsx';
 import Settings from './pages/Dashboard/Settings.jsx';
 import AboutUs from './pages/about-us/About-us.jsx';
 import Cart from './pages/cart/Cart.jsx';
+import DashHome from './pages/Dashboard/DashHome';
+
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
+
+export const sidebarStatus = React.createContext();
 
 function App() {
+	const [sidebarExpanded, setSidebarExpanded] = useState(false);
 	return (
 		<div className="App">
-			<BrowserRouter>
-				{/* so we have   ,orders , cart */}
-
-				<Routes>
-					{/* home routes */}
-					<Route path="/" element={<Home />}>
-						<Route path="/about" element={<AboutUs />} />
-						<Route path="/categories" element={<Categories />}>
+			<sidebarStatus.Provider
+				value={[sidebarExpanded, setSidebarExpanded]}
+			>
+				<BrowserRouter>
+					<Routes>
+						{/* home routes */}
+						<Route path="/" element={<Home />}>
+							<Route path="/about" element={<AboutUs />} />
+							<Route path="/categories" element={<Categories />}>
+								<Route
+									path="/categories/category"
+									element={<SubCategories />}
+								/>
+							</Route>
+							<Route path="/contact" element={<ContactUs />} />
 							<Route
-								path="/categories/category"
-								element={<SubCategories />}
+								path="/instructions"
+								element={<Instruction />}
 							/>
+							<Route path="/orders" element={<Orders />} />
+							<Route path="/profile" element={<Profile />} />
+							<Route path="/cart" element={<Cart />} />
 						</Route>
-						<Route path="/contact" element={<ContactUs />} />
-						<Route path="/instructions" element={<Instruction />} />
-						<Route path="/orders" element={<Orders />} />
-						<Route path="/profile" element={<Profile />} />
-						<Route path="/cart" element={<Cart />} />
-					</Route>
 
-					{/* Dashboard routes */}
-					<Route path="/admin/dashboard" element={<Dashboard />}>
-						<Route
-							path="/admin/dashboard/settings"
-							element={<Settings />}
-						></Route>
-						<Route
-							path="/admin/dashboard/products"
-							element={<Products />}
-						></Route>
-						<Route
-							path="/admin/dashboard/admins"
-							element={<Admins />}
-						></Route>
-						<Route
-							path="/admin/dashboard/users"
-							element={<Users />}
-						></Route>
-					</Route>
-				</Routes>
-			</BrowserRouter>
+						{/* Dashboard routes */}
+						<Route path="/admin/dashboard" element={<Dashboard />}>
+							<Route
+								exact
+								path="/admin/dashboard/home"
+								element={<DashHome />}
+							></Route>
+							<Route
+								path="/admin/dashboard/settings"
+								element={<Settings />}
+							></Route>
+							<Route
+								path="/admin/dashboard/products"
+								element={<Products />}
+							></Route>
+							<Route
+								path="/admin/dashboard/admins"
+								element={<Admins />}
+							></Route>
+							<Route
+								path="/admin/dashboard/users"
+								element={<Users />}
+							></Route>
+						</Route>
+					</Routes>
+				</BrowserRouter>
+			</sidebarStatus.Provider>
 		</div>
 	);
 }

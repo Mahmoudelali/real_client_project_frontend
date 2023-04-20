@@ -1,0 +1,80 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--primary: #ffffff;
+	--secondary: #000000;
+	--accent: #fc6d26;
+}
+.active {
+	color: var(--accent) !important;
+	text-decoration: underline !important;
+	font-weight: 900;
+}
+.dashboard-container {
+	position: relative;
+}
+
+.side-bar-container {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	padding: 1rem 0 1rem 10px;
+
+	height: 100vh;
+	justify-content: space-between;
+	background-color: var(--secondary);
+
+	display: flex;
+	flex-direction: column;
+	box-shadow: 6px 5px 33px -6px rgba(64, 64, 64, 1);
+	-webkit-box-shadow: 6px 5px 33px -6px rgba(64, 64, 64, 1);
+	-moz-box-shadow: 6px 5px 33px -6px rgba(64, 64, 64, 1);
+}
+
+@media screen and (min-width: 768px) {
+	.toggle-menu-icon {
+		display: none !important;
+	}
+	.side-bar-container {
+		display: flex !important;
+		width: 12% !important;
+	}
+}
+.side-bar-container .greetings h1 {
+	font-weight: 500;
+	letter-spacing: 3px;
+}
+.side-bar-container .greetings h2 {
+	font-size: 1rem;
+	letter-spacing: 1.5px;
+	text-transform: capitalize;
+}
+.side-bar-container,
+.side-bar-container a {
+	color: var(--primary);
+}
+
+.side-bar-container a {
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	padding: 10px 0;
+	letter-spacing: 1.5px;
+}
+.side-bar-container svg {
+	margin-right: 10px;
+}
+
+.toggle-menu-icon {
+	all: unset;
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 1rem;
+	transition: 0.2s;
+}
