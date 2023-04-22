@@ -12,6 +12,9 @@
 .active {
 	color: var(--accent) !important;
 }
+.none {
+	display: none !important;
+}
 .dashboard-container {
 	position: relative;
 }
@@ -22,7 +25,6 @@
 	left: 0;
 
 	padding: 1rem 0 1rem 10px;
-
 	height: 100vh;
 	justify-content: space-between;
 	background-color: var(--secondary);
@@ -30,8 +32,15 @@
 	display: flex;
 	flex-direction: column;
 	box-shadow: 6px 5px 33px -6px rgba(64, 64, 64, 1);
-	-webkit-box-shadow: 6px 5px 33px -6px rgba(64, 64, 64, 1);
-	-moz-box-shadow: 6px 5px 33px -6px rgba(64, 64, 64, 1);
+	overflow: hidden;
+	transition: 0.4s;
+
+	width: 75%;
+}
+.side-bar-hidden {
+	transform: translateX(-101%);
+	box-shadow: unset;
+	transition: 0.2s;
 }
 main {
 	padding: 0.5rem;
