@@ -22,13 +22,15 @@ import DashHome from './pages/Dashboard/DashHome';
 import Pending from './pages/Dashboard/Pending.jsx';
 import Register from './components/register/Register';
 
-export const sidebarStatus = React.createContext();
+export const SidebarStatus = React.createContext();
 
 function App() {
-	const [sidebarExpanded, setSidebarExpanded] = useState(false);
+	const [sidebarExpanded, setSidebarExpanded] = useState(
+		window.screen.width > 468 ? true : false,
+	);
 	return (
 		<div className="App">
-			<sidebarStatus.Provider
+			<SidebarStatus.Provider
 				value={[sidebarExpanded, setSidebarExpanded]}
 			>
 				<BrowserRouter>
@@ -57,7 +59,7 @@ function App() {
 						<Route path="/admin/dashboard" element={<Dashboard />}>
 							<Route
 								exact
-								path="/admin/dashboard/home"
+								path="/admin/dashboard/"
 								element={<DashHome />}
 							></Route>
 							<Route
@@ -83,7 +85,7 @@ function App() {
 						</Route>
 					</Routes>
 				</BrowserRouter>
-			</sidebarStatus.Provider>
+			</SidebarStatus.Provider>
 		</div>
 	);
 }
