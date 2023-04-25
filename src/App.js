@@ -20,6 +20,7 @@ import AboutUs from './pages/about-us/About-us.jsx';
 import Cart from './pages/cart/Cart.jsx';
 import DashHome from './pages/Dashboard/DashHome';
 import Pending from './pages/Dashboard/Pending.jsx';
+import Register from './components/register/Register';
 
 export const sidebarStatus = React.createContext();
 
@@ -34,6 +35,7 @@ function App() {
 					<Routes>
 						{/* home routes */}
 						<Route path="/" element={<Home />}>
+							<Route path="/register" element={<Register />} />
 							<Route path="/about" element={<AboutUs />} />
 							<Route path="/categories" element={<Categories />}>
 								<Route
