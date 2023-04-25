@@ -18,7 +18,7 @@ import PendingIcon from '@mui/icons-material/Pending';
 const sideLinks = [
 	{
 		icon: <HomeSharpIcon />,
-		path: '/admin/dashboard/home',
+		path: '/admin/dashboard/',
 		name: 'Home',
 	},
 	{
@@ -73,6 +73,7 @@ const Dashboard = () => {
 					<h1>Khizana</h1>
 					<h2>hello, name</h2>
 				</div>
+
 				<div className="side-links-container">
 					{sideLinks.map(({ icon, path, name }, index) => {
 						return (
