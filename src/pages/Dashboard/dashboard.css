@@ -11,6 +11,7 @@
 }
 .active {
 	color: var(--accent) !important;
+	transform: scale(1.06) translateX(10px);
 }
 .none {
 	display: none !important;
@@ -85,6 +86,10 @@ main {
 
 .side-bar-container a:hover {
 	color: var(--accent);
+	transform: scale(1.06) translateX(10px);
+}
+.side-bar-container a:focus {
+	color: #ffffff;
 }
 
 .side-bar-container a::before {
