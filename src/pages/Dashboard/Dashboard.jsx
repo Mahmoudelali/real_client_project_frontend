@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import { sidebarStatus } from '../../App.js';
+import { SidebarStatus } from '../../App.js';
 import './dashboard.css';
 
 // icons
@@ -18,7 +18,7 @@ import PendingIcon from '@mui/icons-material/Pending';
 const sideLinks = [
 	{
 		icon: <HomeSharpIcon />,
-		path: '/admin/dashboard/home',
+		path: '/admin/dashboard/',
 		name: 'Home',
 	},
 	{
@@ -46,10 +46,9 @@ const sideLinks = [
 		path: '/admin/dashboard/settings',
 		name: 'Settings',
 	},
-	
 ];
 const Dashboard = () => {
-	const [sidebarExpanded, setSidebarExpanded] = useContext(sidebarStatus);
+	const [sidebarExpanded, setSidebarExpanded] = useContext(SidebarStatus);
 
 	return (
 		<div className="dashboard-container">
@@ -64,16 +63,17 @@ const Dashboard = () => {
 				</Grid>
 			</button>
 			<div
-				className="side-bar-container"
-				style={{
-					width: sidebarExpanded ? '75%' : 0,
-					display: sidebarExpanded ? 'flex' : 'none',
-				}}
+				className={
+					sidebarExpanded
+						? 'side-bar-container'
+						: 'side-bar-container side-bar-hidden'
+				}
 			>
 				<div className="greetings">
 					<h1>Khizana</h1>
 					<h2>hello, name</h2>
 				</div>
+
 				<div className="side-links-container">
 					{sideLinks.map(({ icon, path, name }, index) => {
 						return (
@@ -81,7 +81,8 @@ const Dashboard = () => {
 								key={index}
 								to={path}
 								onClick={() => {
-									setSidebarExpanded(!sidebarExpanded);
+									window.screen.width < 468 &&
+										setSidebarExpanded(!sidebarExpanded);
 								}}
 							>
 								<Grid item xs={1}>
