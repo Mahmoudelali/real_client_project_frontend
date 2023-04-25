@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	border-spacing: 0;
 }
 
 :root {
@@ -12,6 +13,10 @@
 .active {
 	color: var(--accent) !important;
 	transform: scale(1.06) translateX(10px);
+}
+.title {
+	text-align: center;
+	margin: 2rem 0;
 }
 .none {
 	display: none !important;
@@ -37,6 +42,7 @@
 	transition: 0.4s;
 
 	width: 75%;
+	z-index: 99999999999;
 }
 .side-bar-hidden {
 	transform: translateX(-101%);
@@ -86,7 +92,6 @@ main {
 
 .side-bar-container a:hover {
 	color: var(--accent);
-	transform: scale(1.06) translateX(10px);
 }
 .side-bar-container a:focus {
 	color: #ffffff;
@@ -117,4 +122,52 @@ main {
 	right: 0;
 	margin: 1rem;
 	transition: 0.2s;
+}
+
+/*  */
+.products-container table {
+	width: 80%;
+	margin: 0 auto;
+	border-collapse: collapse;
+	border-spacing: 0;
+	font-size: 14px;
+	color: #333;
+	line-height: 1.5;
+}
+
+.products-container th,
+.users-table-container th,
+.users-table-container td,
+.products-container td {
+	color: gray !important;
+	padding: 15px 20px;
+	text-align: center !important;
+	border-bottom: 1px solid #ddd;
+}
+
+.products-container th,
+.users-table-container th {
+	font-weight: bold;
+	background-color: #f2f2f2;
+}
+
+.products-container tr:nth-child(even),
+.users-table-container tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
+.delete-icon,
+.edit-icon {
+	transition: 0.4s !important;
+}
+.delete-icon:hover {
+	color: #dc3545 !important;
+}
+.edit-icon:hover {
+	color: blueviolet !important;
+}
+
+.users-container {
+	/* background-color: red; */
+	min-height: 100vh;
+	overflow-x: scroll;
 }
