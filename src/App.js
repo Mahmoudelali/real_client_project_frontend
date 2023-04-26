@@ -25,7 +25,7 @@ import Register from './components/register/Register';
 export const SidebarStatus = React.createContext();
 
 function App() {
-	const [sidebarExpanded, setSidebarExpanded] = useState(false);
+	const [sidebarExpanded, setSidebarExpanded] = useState(false );
 	return (
 		<div className="App">
 			<SidebarStatus.Provider
