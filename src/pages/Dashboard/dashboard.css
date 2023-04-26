@@ -61,7 +61,7 @@ main {
 		width: 12% !important;
 	}
 	main {
-		padding: 1rem 1rem 1rem 14%;
+		padding: 1rem 1rem 1rem 14% !important;
 	}
 }
 .side-bar-container .greetings h1 {
@@ -125,6 +125,7 @@ main {
 }
 
 /*  */
+
 .products-container table {
 	width: 80%;
 	margin: 0 auto;
@@ -149,6 +150,9 @@ main {
 .users-table-container th {
 	font-weight: bold;
 	background-color: #f2f2f2;
+}
+.users-table-container th button {
+	padding: 1rem 1.5rem;
 }
 
 .products-container tr:nth-child(even),
