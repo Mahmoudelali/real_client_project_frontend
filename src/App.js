@@ -10,7 +10,6 @@ import ContactUs from "./pages/contact-us/Contact-us.jsx";
 import Instruction from "./pages/instruction/Instruction.jsx";
 import Orders from "./pages/order/Orders.jsx";
 import Profile from "./pages/Profile/Profile.jsx";
-
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import Users from "./pages/Dashboard/Users.jsx";
 import Admins from "./pages/Dashboard/Admins.jsx";
@@ -25,17 +24,18 @@ import Login from "./components/login/Login";
 import axios from "axios";
 import cookie from "react-cookies";
 import Main from "./pages/main/Main";
+import VisitorUnauth from "./components/visitorUnauth/VisitorUnauth";
 
 export const SidebarStatus = React.createContext();
 export const isLoggedIn = React.createContext();
 
 function App() {
-
 	const [sidebarExpanded, setSidebarExpanded] = useState(
 		window.screen.width > 468 ? true : false
 	);
 
 	const [loggedIn, setLoggedIn] = useState(false);
+	const [isAdmin, setIsAdmin] = useState(false);
 
 	const userIsLoggedIn = () => {
 		axios
@@ -44,6 +44,14 @@ function App() {
 			})
 			.then((response) => {
 				if (response.status === 200) {
+					if (
+						cookie.load("user").role === "admin" ||
+						cookie.load("user").role === "superAdmin"
+					) {
+						setIsAdmin(true);
+					} else {
+						setIsAdmin(false);
+					}
 					setLoggedIn(true);
 				}
 			})
@@ -58,8 +66,7 @@ function App() {
 
 	useEffect(() => {
 		userIsLoggedIn();
-	}, []);
-	console.log(loggedIn);
+	}, [loggedIn, isAdmin]);
 
 	return (
 		<div className="App">
@@ -87,33 +94,36 @@ function App() {
 							</Route>
 
 							{/* Dashboard routes */}
-							<Route path="/admin/dashboard" element={<Dashboard />}>
-								<Route
-									exact
-									path="/admin/dashboard/"
-									element={<DashHome />}
-								></Route>
-								<Route
-									path="/admin/dashboard/settings"
-									element={<Settings />}
-								></Route>
-								<Route
-									path="/admin/dashboard/products"
-									element={<Products />}
-								></Route>
-								<Route
-									path="/admin/dashboard/admins"
-									element={<Admins />}
-								></Route>
-								<Route
-									path="/admin/dashboard/users"
-									element={<Users />}
-								></Route>
-								<Route
-									path="/admin/dashboard/pending"
-									element={<Pending />}
-								></Route>
-							</Route>
+							{isAdmin && (
+								<Route path="/admin/dashboard" element={<Dashboard />}>
+									<Route
+										exact
+										path="/admin/dashboard/"
+										element={<DashHome />}
+									></Route>
+									<Route
+										path="/admin/dashboard/settings"
+										element={<Settings />}
+									></Route>
+									<Route
+										path="/admin/dashboard/products"
+										element={<Products />}
+									></Route>
+									<Route
+										path="/admin/dashboard/admins"
+										element={<Admins />}
+									></Route>
+									<Route
+										path="/admin/dashboard/users"
+										element={<Users />}
+									></Route>
+									<Route
+										path="/admin/dashboard/pending"
+										element={<Pending />}
+									></Route>
+								</Route>
+							)}
+							<Route path="*" element={<VisitorUnauth />} />
 						</Routes>
 					</BrowserRouter>
 				</SidebarStatus.Provider>
