@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useContext } from "react";
 import "./Register.css";
 import { parsePhoneNumberFromString } from "libphonenumber-js";
 import axios from "axios";
 import cookie from "react-cookies";
+import { isLoggedIn } from "../../App";
 
 function Register() {
     const [phoneNumber, setPhoneNumber] = useState("");
@@ -14,6 +15,8 @@ function Register() {
     const password = useRef();
     const phone = useRef();
     const image = useRef();
+
+    const [loggedIn, setLoggedIn] = useContext(isLoggedIn);
 
     const handlePhoneNumber = (event) => {
         const value = event.target.value;
@@ -50,6 +53,8 @@ function Register() {
                 cookie.save("auth_token", response.data.token, {
                     maxAge: 5 * 60 * 60 * 1000,
                 });
+                setErr("");
+                setLoggedIn(true);
             })
             .catch((error) => {
                 console.log(error);
@@ -76,6 +81,7 @@ function Register() {
                     name="username"
                     className="register-input"
                     placeholder="username"
+                    minLength={3}
                     required
                 />
 
@@ -89,7 +95,7 @@ function Register() {
                     id="email"
                     name="email"
                     className="register-input"
-                    placeholder="Email"
+                    placeholder="email@gmail.com"
                 />
 
                 <label htmlFor="phoneNumber" className="register-label">
@@ -127,6 +133,7 @@ function Register() {
                     name="password"
                     className="register-input"
                     placeholder="password"
+                    minLength={8}
                     required
                 />
 
