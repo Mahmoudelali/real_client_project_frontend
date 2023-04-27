@@ -2,12 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Loader from '../../components/Loader.jsx';
 import User from '../../components/User.jsx';
-import AddIcon from '@mui/icons-material/Add';
-import { Grid } from '@mui/material';
 
 var urlEnv = process.env.REACT_APP_URL;
 const Users = () => {
-	const tableTitles = ['Username', 'Country', 'Email', 'Role', 'Phone', 'ID'];
+	const tableTitles = [
+		'Username',
+		'Country',
+		'Email',
+		'Role',
+		'Phone',
+		'ID',
+		'Delete',
+	];
 	const [users, setUsers] = useState(null);
 
 	const getAllUsers = () => {
@@ -54,6 +60,7 @@ const Users = () => {
 									isAdmin,
 								}) => (
 									<User
+										getAllUsers={getAllUsers}
 										role={role}
 										phone={phone}
 										country={country}
@@ -66,29 +73,9 @@ const Users = () => {
 								),
 							)}
 						<tr>
-							<td colSpan={2}>
+							<td colSpan={8}>
 								{' '}
 								<strong>Total </strong>: {users.length}
-							</td>
-							<td colSpan={2}>
-								{' '}
-								<strong>Total </strong>: {users.length}
-							</td>
-							<td colSpan={3}>
-								<button
-								className='add-user-btn'
-									style={{
-										color: 'black',
-										all: 'unset',
-										display: 'block',
-										width: '100%',
-									}}
-								>
-									<span>Add New User !</span>
-									<Grid item>
-										<AddIcon>xs=8</AddIcon>
-									</Grid>{' '}
-								</button>
 							</td>
 						</tr>
 					</tbody>
