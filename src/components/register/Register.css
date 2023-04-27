@@ -36,26 +36,13 @@
   padding: 0;
 }
 .register-error-message {
-  color: var(--primary);
-  background-color: red;
+  color: red;
   font-weight: 900;
-  border-radius: 5px;
   font-size: 1.2pc;
   width: 100%;
   text-align: center;
   margin: auto;
   line-height: 2;
-  animation: changeColor 500ms ease-in-out 0s infinite alternate;
-}
-
-@keyframes changeColor {
-  from {
-    background-color: red;
-  }
-
-  to {
-    background-color: var(--secondary);
-  }
 }
 
 .register-button {
