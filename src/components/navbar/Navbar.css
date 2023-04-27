@@ -88,11 +88,11 @@
 .nav-container {
   display: none;
 }
-/* .cart-icon {
+.cart-icon {
   color: #000000;
-  size: 3pc;
-  padding: 10px;
-} */
+  /* size: 3pc;
+  padding: 10px; */
+}
 
 @media screen and (max-width: 1000px) {
   .nav-whole-nav {
