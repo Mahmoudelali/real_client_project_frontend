@@ -1,0 +1,46 @@
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #000000;
+  padding: 10px;
+}
+
+.nav-left,
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-center {
+  flex: 2;
+  text-align: center;
+}
+
+.nav-center img {
+  height: 60px;
+}
+
+.nav-left svg,
+.nav-right svg {
+  height: 30px;
+  width: 30px;
+}
+/* Styles for desktop view */
+@media screen and (min-width: 768px) {
+  .logo-desktop {
+    display: block;
+    width: 100%;
+    height: 70px;
+    background-repeat: no-repeat;
+    background-position: center;
+    /* Make the background image cover the container */
+    /* background-size: cover; */
+    /* Or: */
+    background-size: 25%;
+  }
+  .logo-mobile {
+    display: none;
+  }
+}

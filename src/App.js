@@ -30,6 +30,7 @@ export const SidebarStatus = React.createContext();
 export const isLoggedIn = React.createContext();
 
 function App() {
+
 	const [sidebarExpanded, setSidebarExpanded] = useState(
 		window.screen.width > 468 ? true : false
 	);
@@ -59,6 +60,7 @@ function App() {
 		userIsLoggedIn();
 	}, []);
 	console.log(loggedIn);
+
 	return (
 		<div className="App">
 			<isLoggedIn.Provider value={[loggedIn, setLoggedIn]}>
