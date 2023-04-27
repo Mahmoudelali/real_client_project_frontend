@@ -1,6 +1,7 @@
 import "./Navbar.css";
 import React from "react";
 import Logo from "../../images/Picsart_23-04-05_12-35-00-032.jpg";
+import LocalMallRoundedIcon from "@mui/icons-material/LocalMallRounded";
 import { NavLink, Link } from "react-router-dom";
 import axios from "axios";
 import cookie from "react-cookies";
@@ -112,7 +113,6 @@ class Navbar extends React.Component {
             >
               Contact
             </NavLink>
-
             {!loggedIn ? (
               <>
                 <Link
@@ -131,6 +131,17 @@ class Navbar extends React.Component {
                 >
                   Register
                 </Link>
+                <Link
+                  to="/cart"
+                  id="nav-cart"
+                  className="nav-cart"
+                  onClick={(e) => this.menuButton()}
+                >
+                  
+                <LocalMallRoundedIcon className="cart-icon"/>
+                </Link>
+                
+                
               </>
             ) : (
               <>
