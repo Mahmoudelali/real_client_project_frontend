@@ -45,7 +45,7 @@
   opacity: 1;
 }
 
-.active {
+.nav-navigation .active {
   border-bottom: 2px solid var(--accent);
   opacity: 1;
 }
