@@ -1,12 +1,14 @@
 import React, { useRef, useState, useContext } from "react";
 import "./Login.css";
-import { parsePhoneNumberFromString } from "libphonenumber-js";
 import axios from "axios";
 import cookie from "react-cookies";
 import { isLoggedIn } from "../../App";
+import { Link, Navigate } from "react-router-dom";
 
 function Login() {
     const [err, setErr] = useState("");
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [loading, setLoading] = useState(false);
     const emailOrPhone = useRef();
     const password = useRef();
 
@@ -14,6 +16,7 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
         let data = {};
         if (emailOrPhone.current.value.includes("@")) {
             data.email = emailOrPhone.current.value;
@@ -24,7 +27,6 @@ function Login() {
         axios
             .post(`${process.env.REACT_APP_URL}/user/login`, data)
             .then((response) => {
-                console.log(response);
                 cookie.save("user", JSON.stringify(response.data.response), {
                     maxAge: 5 * 60 * 60 * 1000,
                 });
@@ -32,7 +34,14 @@ function Login() {
                     maxAge: 5 * 60 * 60 * 1000,
                 });
                 setErr("");
+                if (
+                    response.data.response.role === "admin" ||
+                    response.data.response.role === "superAdmin"
+                ) {
+                    setIsAdmin(true);
+                }
                 setLoggedIn(true);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -41,11 +50,17 @@ function Login() {
                 } else {
                     setErr(error.response.data.err);
                 }
+                setLoading(false);
             });
     };
 
     return (
         <>
+            {loggedIn && isAdmin ? (
+                <Navigate to="/admin/dashboard/" replace={true} />
+            ) : (
+                loggedIn && <Navigate to="/" replace={true} />
+            )}
             <form onSubmit={handleSubmit} className="login-form">
                 <h2 className="login-title">Login</h2>
 
@@ -85,8 +100,11 @@ function Login() {
                 )}
 
                 <button type="submit" className="login-button">
-                    Login
+                    {loading ? "Checking..." : "Login"}
                 </button>
+                <p className="login-link">
+                    New user? <Link to="/register">Register</Link>
+                </p>
             </form>
         </>
     );

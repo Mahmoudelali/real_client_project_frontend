@@ -4,12 +4,14 @@ import { parsePhoneNumberFromString } from "libphonenumber-js";
 import axios from "axios";
 import cookie from "react-cookies";
 import { isLoggedIn } from "../../App";
+import { Link, Navigate } from "react-router-dom";
 
 function Register() {
     const [phoneNumber, setPhoneNumber] = useState("");
     const [isValidPhone, setIsValidPhone] = useState(true);
     const [phoneError, setPhoneError] = useState(true);
     const [err, setErr] = useState("");
+    const [loading, setLoading] = useState(false);
     const username = useRef();
     const email = useRef();
     const password = useRef();
@@ -37,6 +39,7 @@ function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
         const formData = new FormData();
         formData.append("username", username.current.value);
         formData.append("phone", phone.current.value);
@@ -55,6 +58,7 @@ function Register() {
                 });
                 setErr("");
                 setLoggedIn(true);
+                setLoading(false);
             })
             .catch((error) => {
                 console.log(error);
@@ -63,11 +67,13 @@ function Register() {
                 } else {
                     setErr(error.response.data.err);
                 }
+                setLoading(false);
             });
     };
 
     return (
         <>
+            {loggedIn && <Navigate to="/" replace={true} />}
             <form onSubmit={handleSubmit} className="register-form">
                 <h2 className="register-title">Create an account</h2>
                 <label htmlFor="username" className="register-label">
@@ -159,8 +165,11 @@ function Register() {
                 )}
 
                 <button type="submit" className="register-button">
-                    Register
+                    {loading ? "Checking..." : "Register"}
                 </button>
+                <p className="register-link">
+                    Already a user? <Link to="/login">Login</Link>
+                </p>
             </form>
         </>
     );
