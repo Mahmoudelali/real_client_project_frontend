@@ -1,8 +1,9 @@
-import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 
 // components
+
 import Home from "./pages/home/Home.jsx";
 import Categories from "./pages/category/Categories.jsx";
 import SubCategories from "./pages/category/SubCategories.jsx";
@@ -31,7 +32,7 @@ export const isLoggedIn = React.createContext();
 
 function App() {
 	const [sidebarExpanded, setSidebarExpanded] = useState(
-		window.screen.width > 468 ? true : false
+		window.screen.width > 468 ? true : false,
 	);
 
 	const [loggedIn, setLoggedIn] = useState(false);
@@ -40,7 +41,7 @@ function App() {
 	const userIsLoggedIn = () => {
 		axios
 			.get(`${process.env.REACT_APP_URL}/user/is-logged-in`, {
-				headers: { auth_token: cookie.load("auth_token") },
+				headers: { auth_token: cookie.load('auth_token') },
 			})
 			.then((response) => {
 				if (response.status === 200) {
@@ -68,32 +69,48 @@ function App() {
 		userIsLoggedIn();
 	}, [loggedIn, isAdmin]);
 
+
 	return (
 		<div className="App">
 			<isLoggedIn.Provider value={[loggedIn, setLoggedIn]}>
-				<SidebarStatus.Provider value={[sidebarExpanded, setSidebarExpanded]}>
+				<SidebarStatus.Provider
+					value={[sidebarExpanded, setSidebarExpanded]}
+				>
 					<BrowserRouter>
 						<Routes>
 							{/* home routes */}
 							<Route path="/" element={<Home />}>
 								<Route path="/" element={<Main />} />
-								<Route path="/register" element={<Register />} />
+								<Route
+									path="/register"
+									element={<Register />}
+								/>
 								<Route path="/login" element={<Login />} />
 								<Route path="/about" element={<AboutUs />} />
-								<Route path="/categories" element={<Categories />}>
+								<Route
+									path="/categories"
+									element={<Categories />}
+								>
 									<Route
 										path="/categories/category"
 										element={<SubCategories />}
 									/>
 								</Route>
-								<Route path="/contact" element={<ContactUs />} />
-								<Route path="/instructions" element={<Instruction />} />
+								<Route
+									path="/contact"
+									element={<ContactUs />}
+								/>
+								<Route
+									path="/instructions"
+									element={<Instruction />}
+								/>
 								<Route path="/orders" element={<Orders />} />
 								<Route path="/profile" element={<ProfilePage />} />
 								<Route path="/cart" element={<Cart />} />
 							</Route>
 
 							{/* Dashboard routes */}
+
 							{isAdmin && (
 								<Route path="/admin/dashboard" element={<Dashboard />}>
 									<Route
@@ -124,6 +141,7 @@ function App() {
 								</Route>
 							)}
 							<Route path="*" element={<VisitorUnauth />} />
+
 						</Routes>
 					</BrowserRouter>
 				</SidebarStatus.Provider>
