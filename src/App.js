@@ -9,7 +9,6 @@ import SubCategories from "./pages/category/SubCategories.jsx";
 import ContactUs from "./pages/contact-us/Contact-us.jsx";
 import Instruction from "./pages/instruction/Instruction.jsx";
 import Orders from "./pages/order/Orders.jsx";
-import Profile from "./pages/Profile/Profile.jsx";
 import Dashboard from "./pages/Dashboard/Dashboard.jsx";
 import Users from "./pages/Dashboard/Users.jsx";
 import Admins from "./pages/Dashboard/Admins.jsx";
@@ -25,6 +24,7 @@ import axios from "axios";
 import cookie from "react-cookies";
 import Main from "./pages/main/Main";
 import VisitorUnauth from "./components/visitorUnauth/VisitorUnauth";
+import ProfilePage from "./pages/Profile/Profile.jsx";
 
 export const SidebarStatus = React.createContext();
 export const isLoggedIn = React.createContext();
@@ -89,7 +89,7 @@ function App() {
 								<Route path="/contact" element={<ContactUs />} />
 								<Route path="/instructions" element={<Instruction />} />
 								<Route path="/orders" element={<Orders />} />
-								<Route path="/profile" element={<Profile />} />
+								<Route path="/profile" element={<ProfilePage />} />
 								<Route path="/cart" element={<Cart />} />
 							</Route>
 
