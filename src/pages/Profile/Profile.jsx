@@ -1,7 +1,14 @@
-import React from 'react';
+import React from "react";
+import Profile from "../../components/profile/Profile";
+import Post from "../../components/post/Post";
 
-const Profile = () => {
-	return <div>Profile</div>;
+const ProfilePage = () => {
+  return (
+    <>
+      <Profile />
+      <Post />
+    </>
+  );
 };
 
-export default Profile;
+export default ProfilePage;

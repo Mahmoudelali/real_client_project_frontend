@@ -60,6 +60,7 @@ const Users = () => {
 									isAdmin,
 								}) => (
 									<User
+										adminsView={false}
 										getAllUsers={getAllUsers}
 										role={role}
 										phone={phone}
