@@ -1,0 +1,27 @@
+.visitor-unauthorized {
+  color: red;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: xx-large;
+  font-weight: 900;
+  animation: changeColor 500ms ease-in-out 0s infinite alternate;
+}
+
+@keyframes changeColor {
+  from {
+    background-color: var(--accent);
+  }
+
+  to {
+    background-color: var(--secondary);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .visitor-unauthorized {
+    font-size: medium;
+  }
+}

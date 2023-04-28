@@ -7,9 +7,9 @@
   flex-direction: column;
   width: 100%;
   max-width: 375px;
-  margin: auto;
-  box-shadow: 6px 5px 33px -6px rgba(64, 64, 64, 1);
+  margin: 1pc auto;
   padding: 1pc;
+  border-radius: 5px;
 }
 
 .login-label {
@@ -52,4 +52,15 @@
   color: var(--primary);
   border: 1px solid var(--secondary);
   border-radius: 5px;
+}
+
+.login-link {
+  margin-top: 1pc;
+}
+
+@media screen and (min-width: 1000px) {
+  .login-form {
+    margin: 10.9vh auto;
+    box-shadow: 0px 0px 20px -6px rgba(64, 64, 64, 1);
+  }
 }
