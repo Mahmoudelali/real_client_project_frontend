@@ -24,6 +24,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   transition: transform 0.3s ease-in-out;
+  
 }
 
 .category-circle:hover {

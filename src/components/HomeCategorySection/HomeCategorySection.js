@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './HomeCategorySection.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./HomeCategorySection.css";
 
 function HomeCategorySection() {
   const [categories, setCategories] = useState([]);
@@ -16,7 +16,7 @@ function HomeCategorySection() {
       console.log("Error fetching categories:", error);
     }
     setLoading(false);
-  }
+  };
 
   useEffect(() => {
     fetchData();
@@ -26,20 +26,15 @@ function HomeCategorySection() {
     <div className="category-container">
       {loading ? (
         <div>Loading categories...</div>
-      ) : (
-        Array.isArray(categories) && categories.length > 0 ? (
-          categories.map((category) => {
-            console.log("Rendering category:", category);
-            return (
-              <div key={category.id} className="category-circle">
-                {category.name}
-              </div>
-            )
-          })
-        ) : (
-          null
-        )
-      )}
+      ) : Array.isArray(categories) && categories.length > 0 ? (
+        categories.map((category) => {
+          return (
+            <div key={category.id} className="category-circle">
+              {category.name}
+            </div>
+          );
+        })
+      ) : null}
     </div>
   );
 }
