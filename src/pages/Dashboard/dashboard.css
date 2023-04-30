@@ -21,6 +21,10 @@
 	text-align: center;
 	margin: 2rem 0;
 }
+.btn {
+	all: unset !important;
+	cursor: pointer !important;
+}
 .none {
 	display: none !important;
 }
@@ -175,7 +179,7 @@ main {
 }
 
 .users-container,
-.products {
+.products-container {
 	/* background-color: red; */
 	min-height: 100vh;
 	overflow-x: scroll;
