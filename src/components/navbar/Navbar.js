@@ -59,13 +59,15 @@ function Navbar() {
           >
             Instructions
           </NavLink>
-          <NavLink
-            to="/orders"
-            className="nav-link"
-            onClick={(e) => menuButton()}
-          >
-            Orders
-          </NavLink>
+          {loggedIn && (
+            <NavLink
+              to="/orders"
+              className="nav-link"
+              onClick={(e) => menuButton()}
+            >
+              Orders
+            </NavLink>
+          )}
           <NavLink
             to="/about"
             className="nav-link"

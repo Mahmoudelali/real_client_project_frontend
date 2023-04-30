@@ -26,6 +26,7 @@ import cookie from "react-cookies";
 import Main from "./pages/main/Main";
 import VisitorUnauth from "./components/visitorUnauth/VisitorUnauth";
 import ProfilePage from "./pages/Profile/Profile.jsx";
+import Post from "./components/post/Post";
 
 export const SidebarStatus = React.createContext();
 export const isLoggedIn = React.createContext();
@@ -86,6 +87,7 @@ function App() {
 									element={<Register />}
 								/>
 								<Route path="/login" element={<Login />} />
+								<Route path="/post" element={<Post />} />
 								<Route path="/about" element={<AboutUs />} />
 								<Route
 									path="/categories"
