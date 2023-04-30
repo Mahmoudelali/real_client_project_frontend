@@ -1,15 +1,26 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useContext } from "react";
+import "./home.css";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
+import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
+import { isLoggedIn } from "../../App";
 
 const Home = () => {
+  const [loggedIn] = useContext(isLoggedIn);
+  const location = useLocation();
+
   return (
-    <div>
+    <>
       <Navbar />
       <Outlet />
+      {loggedIn && location.pathname !== "/post" && (
+        <Link to="/post">
+          <AddCircleTwoToneIcon className="home-add" />
+        </Link>
+      )}
       <Footer />
-    </div>
+    </>
   );
 };
 
