@@ -1,0 +1,22 @@
+.home-add {
+  color: var(--accent);
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin: 1pc;
+  font-size: 4pc !important;
+}
+
+@media screen and (min-width: 800px) {
+  .home-add {
+    margin: 2pc;
+    font-size: 5pc !important;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .home-add {
+    margin: 3pc;
+    font-size: 6pc !important;
+  }
+}
