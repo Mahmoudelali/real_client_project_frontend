@@ -16,6 +16,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import PendingIcon from '@mui/icons-material/Pending';
 import HandshakeIcon from '@mui/icons-material/Handshake';
+import axios from 'axios';
 
 const sideLinks = [
 	{
@@ -54,7 +55,7 @@ const sideLinks = [
 		name: 'Settings',
 	},
 ];
-const Dashboard = () => {
+const Dashboard = ({ loggedIn, setLoggedIn }) => {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(SidebarStatus);
 	const username = cookie.load('username');
 
@@ -102,6 +103,16 @@ const Dashboard = () => {
 					})}
 				</div>
 				<NavLink
+					onClick={() => {
+						axios
+							.post(`${process.env.REACT_APP_URL}/user/logout`)
+							.then((res) => {
+								cookie.remove('username');
+								cookie.remove('auth_token');
+								setLoggedIn(!loggedIn);
+							})
+							.catch((err) => console.log(err.message));
+					}}
 					className={'logout-btn'}
 					to={'/admin/dashboard/logout'}
 				>
