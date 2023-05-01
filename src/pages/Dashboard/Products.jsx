@@ -8,18 +8,27 @@ import { Grid } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-
-// export const windowExpand = createContext();
-// import { windowExpand } from '../App.jsx';
-
+const productTitles = [
+	'Name',
+	'Image',
+	'Price',
+	'condition',
+	'Visible',
+	'on_page',
+	'Category',
+	'Edit',
+	'Delete',
+];
 const Products = () => {
 	const handleInputChange = (e) => {
 		setProductData({ ...productData, [e.target.name]: e.target.value });
 	};
+
 	const nodeEnv = process.env.REACT_APP_URL;
 	const [products, setProducts] = useState(null);
 	// const [editViewExpanded, setEditViewExpanded] = useContext(windowExpand);
 	const [productData, setProductData] = useState({});
+
 	const getAllProducts = () => {
 		axios
 			.get(`${nodeEnv}/products/`, {
@@ -59,16 +68,9 @@ const Products = () => {
 								</td>
 							</tr>
 							<tr>
-								<th>Name</th>
-								<th>Image</th>
-								<th>Price($)</th>
-								<th>condition</th>
-
-								<th>Visible</th>
-								<th>On Page</th>
-								<th>Category</th>
-								<th>Edit</th>
-								<th>Delete</th>
+								{productTitles.map((title, index) => {
+									return <th key={index}>{title}</th>;
+								})}
 							</tr>
 						</thead>
 						<tbody>
@@ -136,9 +138,7 @@ const Products = () => {
 					</table>
 				</div>
 			)}
-			<Outlet />
 		</div>
-		// </windowExpand.Provider>
 	);
 };
 
