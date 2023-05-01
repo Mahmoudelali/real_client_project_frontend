@@ -10,6 +10,7 @@ function Post() {
     const [subcategories, setSubcategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
     const [selectedSubcategory, setSelectedSubcategory] = useState("");
+    const [posted, setPosted] = useState(false);
 
     const image = useRef();
     const title = useRef();
@@ -39,6 +40,7 @@ function Post() {
                 console.log(response);
                 setErr("");
                 setLoading(false);
+                setPosted(true);
             })
             .catch((error) => {
                 console.log(error);
@@ -81,149 +83,153 @@ function Post() {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="post-form">
-                <h2 className="post-title">Create a Post</h2>
-                <label htmlFor="image" className="post-label">
-                    Image
-                </label>
+            {posted ? (
+                <h2 className="post-successful">Product Posted Successfully!</h2>
+            ) : (
+                <form onSubmit={handleSubmit} className="post-form">
+                    <h2 className="post-title">Create a Post</h2>
+                    <label htmlFor="image" className="post-label">
+                        Image
+                    </label>
 
-                <input
-                    required
-                    ref={image}
-                    type="file"
-                    id="image"
-                    name="image"
-                    accept="image/png, image/jpeg"
-                    className="post-input"
-                />
-                <label htmlFor="title" className="post-label">
-                    Title
-                </label>
+                    <input
+                        required
+                        ref={image}
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept="image/png, image/jpeg"
+                        className="post-input"
+                    />
+                    <label htmlFor="title" className="post-label">
+                        Title
+                    </label>
 
-                <input
-                    ref={title}
-                    type="text"
-                    id="title"
-                    name="title"
-                    className="post-input"
-                    placeholder="title"
-                    minLength={3}
-                    required
-                />
+                    <input
+                        ref={title}
+                        type="text"
+                        id="title"
+                        name="title"
+                        className="post-input"
+                        placeholder="title"
+                        minLength={3}
+                        required
+                    />
 
-                <label htmlFor="description" className="post-label">
-                    Description
-                </label>
+                    <label htmlFor="description" className="post-label">
+                        Description
+                    </label>
 
-                <input
-                    ref={description}
-                    type="text"
-                    id="description"
-                    name="description"
-                    className="post-input"
-                    placeholder="description"
-                    minLength={3}
-                    required
-                />
+                    <input
+                        ref={description}
+                        type="text"
+                        id="description"
+                        name="description"
+                        className="post-input"
+                        placeholder="description"
+                        minLength={3}
+                        required
+                    />
 
-                <label htmlFor="price" className="post-label">
-                    Price
-                </label>
+                    <label htmlFor="price" className="post-label">
+                        Price
+                    </label>
 
-                <input
-                    ref={price}
-                    type="number"
-                    id="price"
-                    name="price"
-                    className="post-input"
-                    placeholder="price"
-                    minLength={3}
-                    required
-                />
+                    <input
+                        ref={price}
+                        type="number"
+                        id="price"
+                        name="price"
+                        className="post-input"
+                        placeholder="price"
+                        minLength={3}
+                        required
+                    />
 
-                <label htmlFor="condition" className="post-label">
-                    Condition
-                </label>
+                    <label htmlFor="condition" className="post-label">
+                        Condition
+                    </label>
 
-                <input
-                    ref={condition}
-                    type="text"
-                    id="condition"
-                    name="condition"
-                    className="post-input"
-                    placeholder="condition"
-                    minLength={3}
-                    required
-                />
+                    <input
+                        ref={condition}
+                        type="text"
+                        id="condition"
+                        name="condition"
+                        className="post-input"
+                        placeholder="condition"
+                        minLength={3}
+                        required
+                    />
 
-                <label htmlFor="category" className="post-label">
-                    Category
-                </label>
+                    <label htmlFor="category" className="post-label">
+                        Category
+                    </label>
 
-                <select
-                    required
-                    name="category"
-                    ref={categorySelected}
-                    className="post-input post-select"
-                    id="category"
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                >
-                    <option className="post-input" disabled value="">
-                        Select a category
-                    </option>
-                    {categories.map((category) => (
-                        <option
-                            className="post-input"
-                            key={category._id}
-                            value={category._id}
-                        >
-                            {category.name}
+                    <select
+                        required
+                        name="category"
+                        ref={categorySelected}
+                        className="post-input post-select"
+                        id="category"
+                        value={selectedCategory}
+                        onChange={(e) => setSelectedCategory(e.target.value)}
+                    >
+                        <option className="post-input" disabled value="">
+                            Select a category
                         </option>
-                    ))}
-                </select>
-
-                {selectedCategory && (
-                    <>
-                        <label htmlFor="subcategory" className="post-label">
-                            Subcategory
-                        </label>
-
-                        <select
-                            required
-                            name="subcategory"
-                            ref={subCategorySelected}
-                            className="post-input post-select"
-                            id="subcategory"
-                            value={selectedSubcategory}
-                            onChange={(e) => setSelectedSubcategory(e.target.value)}
-                        >
-                            <option className="post-input" disabled value="">
-                                Select a subcategory
+                        {categories.map((category) => (
+                            <option
+                                className="post-input"
+                                key={category._id}
+                                value={category._id}
+                            >
+                                {category.name}
                             </option>
-                            {subcategories.map((subcategory) => (
-                                <option
-                                    className="post-input"
-                                    key={subcategory._id}
-                                    value={subcategory._id}
-                                >
-                                    {subcategory.name}
+                        ))}
+                    </select>
+
+                    {selectedCategory && (
+                        <>
+                            <label htmlFor="subcategory" className="post-label">
+                                Subcategory
+                            </label>
+
+                            <select
+                                required
+                                name="subcategory"
+                                ref={subCategorySelected}
+                                className="post-input post-select"
+                                id="subcategory"
+                                value={selectedSubcategory}
+                                onChange={(e) => setSelectedSubcategory(e.target.value)}
+                            >
+                                <option className="post-input" disabled value="">
+                                    Select a subcategory
                                 </option>
-                            ))}
-                        </select>
-                    </>
-                )}
+                                {subcategories.map((subcategory) => (
+                                    <option
+                                        className="post-input"
+                                        key={subcategory._id}
+                                        value={subcategory._id}
+                                    >
+                                        {subcategory.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </>
+                    )}
 
-                {err !== "" && err && (
-                    <div className="post-error-message" style={{ marginBottom: "1pc" }}>
-                        {err}
-                    </div>
-                )}
+                    {err !== "" && err && (
+                        <div className="post-error-message" style={{ marginBottom: "1pc" }}>
+                            {err}
+                        </div>
+                    )}
 
-                <button type="submit" className="post-button">
-                    {loading ? "Checking..." : "Post"}
-                </button>
-            </form>
+                    <button type="submit" className="post-button">
+                        {loading ? "Checking..." : "Post"}
+                    </button>
+                </form>
+            )}
         </>
     );
 }

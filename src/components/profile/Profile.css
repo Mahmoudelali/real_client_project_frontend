@@ -1,3 +1,9 @@
+.profile-title {
+  padding: 1pc 0;
+  font-size: xx-large;
+  text-align: center;
+}
+
 .profile-whole {
   padding: 1pc 0;
 }
@@ -23,6 +29,9 @@
 }
 
 @media screen and (min-width: 800px) {
+  .profile-title {
+    font-size: xxx-large;
+  }
   .profile-whole {
     padding: 2pc 0;
   }
