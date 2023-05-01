@@ -126,7 +126,7 @@ const DashHome = () => {
 								}).length
 							}
 						</p>
-						<p className="center">
+						<span className="center">
 							<Grid>
 								<PersonIcon
 									sx={{
@@ -134,7 +134,7 @@ const DashHome = () => {
 									}}
 								/>
 							</Grid>
-						</p>
+						</span>
 						<div className="center">
 							<NavLink to="/admin/dashboard/users">
 								Khizana <br /> User
@@ -159,13 +159,13 @@ const DashHome = () => {
 								}).length
 							}
 						</p>
-						<p className="center">
+						<span className="center">
 							<Grid x={1}>
 								<AdminPanelSettingsIcon
 									sx={{ fontSize: '6rem' }}
 								/>
 							</Grid>
-						</p>
+						</span>
 						<p className="center">
 							<NavLink to="/admin/dashboard/admins">
 								Khizana <br /> Admin
