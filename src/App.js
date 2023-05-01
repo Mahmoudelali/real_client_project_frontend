@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 // components
 
+
 import Home from "./pages/home/Home.jsx";
 import Categories from "./pages/category/Categories.jsx";
 import SubCategories from "./pages/category/SubCategories.jsx";
@@ -28,6 +29,7 @@ import VisitorUnauth from "./components/visitorUnauth/VisitorUnauth";
 import ProfilePage from "./pages/Profile/Profile.jsx";
 import Post from "./components/post/Post";
 
+
 export const SidebarStatus = React.createContext();
 export const isLoggedIn = React.createContext();
 
@@ -47,9 +49,10 @@ function App() {
 			.then((response) => {
 				if (response.status === 200) {
 					if (
-						cookie.load("user").role === "admin" ||
-						cookie.load("user").role === "superAdmin"
+						cookie.load('user').role === 'admin' ||
+						cookie.load('user').role === 'superAdmin'
 					) {
+						cookie.save('username', response.data.message.username);
 						setIsAdmin(true);
 					} else {
 						setIsAdmin(false);
@@ -69,7 +72,6 @@ function App() {
 	useEffect(() => {
 		userIsLoggedIn();
 	}, [loggedIn, isAdmin]);
-
 
 	return (
 		<div className="App">
@@ -107,14 +109,20 @@ function App() {
 									element={<Instruction />}
 								/>
 								<Route path="/orders" element={<Orders />} />
-								<Route path="/profile" element={<ProfilePage />} />
+								<Route
+									path="/profile"
+									element={<ProfilePage />}
+								/>
 								<Route path="/cart" element={<Cart />} />
 							</Route>
 
 							{/* Dashboard routes */}
 
 							{isAdmin && (
-								<Route path="/admin/dashboard" element={<Dashboard />}>
+								<Route
+									path="/admin/dashboard"
+									element={<Dashboard />}
+								>
 									<Route
 										exact
 										path="/admin/dashboard/"
@@ -133,6 +141,10 @@ function App() {
 										element={<Admins />}
 									></Route>
 									<Route
+										path="/admin/dashboard/orders"
+										element={<Orders />}
+									></Route>
+									<Route
 										path="/admin/dashboard/users"
 										element={<Users />}
 									></Route>
@@ -143,7 +155,6 @@ function App() {
 								</Route>
 							)}
 							<Route path="*" element={<VisitorUnauth />} />
-
 						</Routes>
 					</BrowserRouter>
 				</SidebarStatus.Provider>
