@@ -50,7 +50,6 @@ function App() {
 						cookie.load('user').role === 'admin' ||
 						cookie.load('user').role === 'superAdmin'
 					) {
-						cookie.save('username', response.data.message.username);
 						setIsAdmin(true);
 					} else {
 						setIsAdmin(false);
