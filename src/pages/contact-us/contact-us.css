@@ -1,0 +1,130 @@
+.container{
+  width:80%;
+  margin: 50px auto;
+}
+
+.contact-box{
+  background: var(--primary);
+  display: flex;
+}
+
+.contact-left{
+  color:var(--primary);
+  border-radius: 10px;
+  flex-basis: 30% ;
+  padding: 40px 60px;
+  background: var(--secondary);
+}
+.contact-right{
+  padding: 40px 60px;
+  flex-basis: 60%;
+}
+
+h1{
+  margin-bottom: 10px;
+}
+
+.container p{
+  margin-bottom: 10px;
+}
+
+.input-row{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.input-row .input-group{
+  flex-basis: 45%;
+}
+
+input{
+  width: 100%;
+  border: none;
+  border-bottom:1px solid #ccc ;
+  outline: none;
+  padding-bottom:5px;
+}
+
+textarea{
+  width: 100%;
+  border:1px solid #ccc;
+  outline:none;
+  padding:10px;
+  box-sizing: border-box;
+}
+
+label{
+  display: block;
+  margin-bottom: 6px;
+}
+
+button{
+background:var(--secondary);
+color: var(--primary);
+cursor: pointer;
+width: 100px;
+border: none;
+outline: none;
+height: 35px;
+border-radius:10px;
+margin-top: 20px;
+}
+
+button:hover{
+  background: var(--accent);
+}
+
+.contact-right h3{
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.contact-left h3{
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+tr td {
+  padding-right: 20px;
+  padding-top: 20px;
+} 
+
+@media screen and (max-width: 768px) {
+  .contact-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .contact-right{
+    padding: 0;
+    flex-basis: 60%;
+  }
+
+  .input-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-group {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  label {
+    margin-bottom: 5px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+}

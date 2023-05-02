@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Loader from '../../components/Loader.jsx';
 import User from '../../components/User.jsx';
-
+import Cookies from 'js-cookie';
 var urlEnv = process.env.REACT_APP_URL;
 const Users = () => {
 	const tableTitles = [
@@ -18,7 +18,11 @@ const Users = () => {
 
 	const getAllUsers = () => {
 		axios
-			.get(`${urlEnv}/user/users`)
+			.get(`${urlEnv}/user/users`, {
+				headers: {
+					auth_token: `${Cookies.get('auth_token')}`,
+				},
+			})
 			.then((res) => {
 				console.log(res.data.response.docs);
 				setUsers(res.data.response.docs);
@@ -60,6 +64,7 @@ const Users = () => {
 									isAdmin,
 								}) => (
 									<User
+										adminsView={false}
 										getAllUsers={getAllUsers}
 										role={role}
 										phone={phone}

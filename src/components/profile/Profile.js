@@ -3,6 +3,7 @@ import "./Profile.css";
 import cookie from "react-cookies";
 import axios from "axios";
 import Loader from "../Loader";
+import UserProducts from "../userProducts/UserProducts";
 
 function Profile() {
     const [user, setUser] = useState({});
@@ -28,24 +29,32 @@ function Profile() {
                 setLoading(false);
             });
     };
-    console.log(user);
+
     return (
         <>
             {loading ? (
                 <Loader />
             ) : (
-                <section className="profile-whole">
-                    <img
-                        src={profileImage}
-                        alt="User Profile"
-                        className="profile-image"
-                    />
-                    <section className="profile-informations">
-                        <p className="profile-info">Username: {user.username}</p>
-                        {user.email && <p className="profile-info">Email: {user.email}</p>}
-                        {user.phone && <p className="profile-info">Phone: {user.phone}</p>}
+                <>
+                    <h2 className="profile-title">Profile</h2>
+                    <section className="profile-whole">
+                        <img
+                            src={profileImage}
+                            alt="User Profile"
+                            className="profile-image"
+                        />
+                        <section className="profile-informations">
+                            <p className="profile-info">Username: {user.username}</p>
+                            {user.email && (
+                                <p className="profile-info">Email: {user.email}</p>
+                            )}
+                            {user.phone && (
+                                <p className="profile-info">Phone: {user.phone}</p>
+                            )}
+                        </section>
                     </section>
-                </section>
+                    <UserProducts />
+                </>
             )}
         </>
     );
