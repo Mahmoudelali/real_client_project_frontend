@@ -41,11 +41,7 @@ const sideLinks = [
 		path: '/admin/dashboard/pending',
 		name: 'Pending',
 	},
-	{
-		icon: <SettingsSharpIcon />,
-		path: '/admin/dashboard/settings',
-		name: 'Settings',
-	},
+	
 ];
 const Dashboard = () => {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(SidebarStatus);
