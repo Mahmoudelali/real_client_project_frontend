@@ -45,7 +45,7 @@ const Products = () => {
 		// <windowExpand.Provider value={[editViewExpanded, setEditViewExpanded]}>
 		<div className="products-container">
 			{!products ? (
-				<Loader />
+				<Loader isComponent={true} />
 			) : (
 				<div>
 					<h2 className="title center">PRODUCTS</h2>
