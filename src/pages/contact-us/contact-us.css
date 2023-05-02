@@ -1,44 +1,44 @@
-.container{
+.contact-container{
   width:80%;
   margin: 50px auto;
 }
 
-.contact-box{
+.contact-contact-box{
   background: var(--primary);
   display: flex;
 }
 
-.contact-left{
+.contact-contact-left{
   color:var(--primary);
   border-radius: 10px;
   flex-basis: 30% ;
   padding: 40px 60px;
   background: var(--secondary);
 }
-.contact-right{
+.contact-contact-right{
   padding: 40px 60px;
   flex-basis: 60%;
 }
 
-h1{
+.contact-title{
   margin-bottom: 10px;
 }
 
-.container p{
+.contact-paragraph{
   margin-bottom: 10px;
 }
 
-.input-row{
+.contact-input-row{
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
-.input-row .input-group{
+.contact-input-row .contact-input-group{
   flex-basis: 45%;
 }
 
-input{
+.contact-input{
   width: 100%;
   border: none;
   border-bottom:1px solid #ccc ;
@@ -46,7 +46,7 @@ input{
   padding-bottom:5px;
 }
 
-textarea{
+.contact-area{
   width: 100%;
   border:1px solid #ccc;
   outline:none;
@@ -54,12 +54,12 @@ textarea{
   box-sizing: border-box;
 }
 
-label{
+.contact-label{
   display: block;
   margin-bottom: 6px;
 }
 
-button{
+.contact-button{
 background:var(--secondary);
 color: var(--primary);
 cursor: pointer;
@@ -71,58 +71,58 @@ border-radius:10px;
 margin-top: 20px;
 }
 
-button:hover{
+.contact-button:hover{
   background: var(--accent);
 }
 
-.contact-right h3{
+.contact-right .contact-h3{
   font-weight: 600;
   margin-bottom: 30px;
 }
 
-.contact-left h3{
+.contact-left .contact-h3{
   font-weight: 600;
   margin-bottom: 30px;
 }
 
-tr td {
+.contact-tr .contact-td {
   padding-right: 20px;
   padding-top: 20px;
 } 
 
 @media screen and (max-width: 768px) {
-  .contact-box {
+  .contact-contact-box {
     display: flex;
     flex-direction: column;
   }
 
-  .contact-left,
-  .contact-right {
+  .contact-contact-left,
+  .contact-contact-right {
     width: 100%;
     margin-bottom: 20px;
   }
 
-  .contact-right{
+  .contact-contact-right{
     padding: 0;
     flex-basis: 60%;
   }
 
-  .input-row {
+  .contact-input-row {
     display: flex;
     flex-direction: column;
   }
 
-  .input-group {
+  .contact-input-group {
     margin-right: 0;
     margin-bottom: 10px;
   }
 
-  label {
+  .contact-label {
     margin-bottom: 5px;
   }
 
-  input,
-  textarea {
+  .contact-input,
+  .contact-area {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;

@@ -29,68 +29,71 @@ const ContactUs = () => {
   };
   return (
     <div>
-      <div className="container">
-        <h1>Contact Us</h1>
-        <p>
+      <div className="contact-container">
+        <h1 className="contact-title">Contact Us</h1>
+        <p className="contact-paragraph">
           Any questions or remarks? Just write us a Message! <br></br>
         </p>
-        <div className="contact-box">
-          <div className="contact-left">
-            <h3>Contact Information</h3>
+        <div className="contact-contact-box">
+          <div className="contact-contact-left">
+            <h3 className="contact-h3">Contact Information</h3>
             <table>
-              <tr>
-                <td>
+              <tr className="contact-tr">
+                <td className="contact-td">
                   <FaEnvelope />
                 </td>
-                <td>khizana@gmail.com</td>
+                <td className="contact-td">khizana@gmail.com</td>
               </tr>
-              <tr>
-                <td>
+              <tr className="contact-tr">
+                <td className="contact-td">
                   <FaPhone />
                 </td>
-                <td>+961 00 000 000</td>
+                <td className="contact-td">+961 00 000 000</td>
               </tr>
             </table>
           </div>
-          <div className="contact-right">
-            <h3>Send Your Message</h3>
+          <div className="contact-contact-right">
+            <h3 className="contact-h3">Send Your Message</h3>
             <form ref={form} onSubmit={sendEmail}>
-              <div className="input-row">
-                <div className="input-group">
-                  <label>First Name</label>
-                  <input type="text" placeholder="Yehia " name="user_Fname" />
+              <div className="contact-input-row">
+                <div className="contact-input-group">
+                  <label className="contact-label">First Name</label>
+                  <input type="text" placeholder="Yehia" className="contact-input" name="user_Fname" />
                 </div>
-                <div className="input-group">
-                  <label>Last Name</label>
-                  <input type="text" placeholder=" Masri" name="user_Lname" />
+                <div className="contact-input-group">
+                  <label className="contact-label">Last Name</label>
+                  <input type="text" placeholder=" Masri" className="contact-input" name="user_Lname" />
                 </div>
               </div>
-              <div className="input-row">
-                <div className="input-group">
-                  <label>Phone</label>
+              <div className="contact-input-row">
+                <div className="contact-input-group">
+                  <label className="contact-label">Phone</label>
                   <input
+                  className="contact-input"
                     type="text"
                     placeholder="+961 00 000 000 "
                     name="phone"
                   />
                 </div>
-                <div className="input-group">
-                  <label>Email</label>
+                <div className="contact-input-group">
+                  <label className="contact-label">Email</label>
                   <input
+                  className="contact-input"
                     type="text"
                     placeholder=" example@gmail.com"
                     name="user_email"
                   />
                 </div>
               </div>
-              <label>Message</label>
+              <label className="contact-label">Message</label>
               <textarea
+              className="contact-area"
                 name="message"
                 rows="5"
                 placeholder="Your Message"
               ></textarea>
 
-              <button type="submit">Send</button>
+              <button className="contact-button" type="submit">Send</button>
             </form>
           </div>
         </div>
