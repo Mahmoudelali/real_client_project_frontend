@@ -63,48 +63,60 @@ const DashHome = () => {
 	useEffect(getAllAdmins, []);
 	useEffect(getAllOrders, []);
 
-	return !products || !users ? (
-		<Loader />
-	) : (
+	return (
 		<div className="dash-home-container">
 			<h1 className="center">Khizana Dashboard</h1>
 			<div className="home-grid-container">
 				<div className="products-home-section">
 					<article className="total-products center">
-						<p className="center big-font">
-							{products && products.length}
-						</p>
+						<div className="center big-font">
+							{!products ? (
+								<Loader border={'5px dotted #fff'} />
+							) : (
+								products.length
+							)}
+						</div>
 						<NavLink to="/admin/dashboard/products">
 							Total <br /> Products
 						</NavLink>
 					</article>
 
 					<article className="onpage-products center">
-						<p className="center big-font">
-							{orders && orders.length}
-						</p>
+						<div className="center big-font">
+							{!orders ? (
+								<Loader border={'5px dotted #fff'} />
+							) : (
+								orders.length
+							)}
+						</div>
 						<NavLink to="/admin/dashboard/orders">
 							Active <br /> Orders
 						</NavLink>
 					</article>
 					<article className="onpage-products center">
-						<p className="center big-font">
-							{products &&
+						<div className="center big-font">
+							{!products ? (
+								<Loader border={'5px dotted #fff'} />
+							) : (
 								products.filter((prod) => {
 									return prod.onPage;
-								}).length}
-						</p>
+								}).length
+							)}
+						</div>
 						<NavLink to="/admin/dashboard/products">
 							Visible <br /> Products
 						</NavLink>
 					</article>
 					<article className="hidden-products center ">
-						<p className="center big-font">
-							{products &&
+						<div className="center big-font">
+							{!products ? (
+								<Loader border={'5px dotted #fff'} />
+							) : (
 								products.filter((prod) => {
 									return !prod.onPage;
-								}).length}
-						</p>
+								}).length
+							)}
+						</div>
 						<NavLink to="/admin/dashboard/products">
 							Hidden <br /> Products
 						</NavLink>
@@ -112,7 +124,7 @@ const DashHome = () => {
 				</div>
 				<div className="users-home-section">
 					<article className="flex-card">
-						<p
+						<span
 							className="center "
 							style={{
 								fontSize: '4rem',
@@ -120,12 +132,14 @@ const DashHome = () => {
 								fontWeight: 900,
 							}}
 						>
-							{
+							{!users ? (
+								<Loader border={'5px dotted #fc6d26'} />
+							) : (
 								users.filter((user) => {
 									return user.role === 'user';
 								}).length
-							}
-						</p>
+							)}
+						</span>
 						<span className="center">
 							<Grid>
 								<PersonIcon
@@ -142,7 +156,7 @@ const DashHome = () => {
 						</div>
 					</article>
 					<article className="flex-card">
-						<p
+						<div
 							className="center"
 							style={{
 								fontSize: '4rem',
@@ -150,15 +164,17 @@ const DashHome = () => {
 								fontWeight: 900,
 							}}
 						>
-							{
+							{!users ? (
+								<Loader border={'5px dotted #fc6d26'} />
+							) : (
 								users.filter((user) => {
 									return (
 										user.role === 'admin' ||
 										user.role === 'superAdmin'
 									);
 								}).length
-							}
-						</p>
+							)}
+						</div>
 						<span className="center">
 							<Grid x={1}>
 								<AdminPanelSettingsIcon
