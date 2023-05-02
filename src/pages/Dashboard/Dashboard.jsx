@@ -57,7 +57,7 @@ const sideLinks = [
 ];
 const Dashboard = ({ loggedIn, setLoggedIn }) => {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(SidebarStatus);
-	const username = cookie.load('username');
+	const username = cookie.load('user').username;
 
 	return (
 		<div className="dashboard-container">
@@ -104,17 +104,12 @@ const Dashboard = ({ loggedIn, setLoggedIn }) => {
 				</div>
 				<NavLink
 					onClick={() => {
-						axios
-							.post(`${process.env.REACT_APP_URL}/user/logout`)
-							.then((res) => {
-								cookie.remove('username');
-								cookie.remove('auth_token');
-								setLoggedIn(!loggedIn);
-							})
-							.catch((err) => console.log(err.message));
+						cookie.remove('user');
+						cookie.remove('auth_token');
+						setLoggedIn(!loggedIn);
 					}}
 					className={'logout-btn'}
-					to={'/admin/dashboard/logout'}
+					to={'/'}
 				>
 					<Grid item xs={1}>
 						<LogoutIcon />
