@@ -89,3 +89,42 @@ tr td {
   padding-right: 20px;
   padding-top: 20px;
 } 
+
+@media screen and (max-width: 768px) {
+  .contact-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-left,
+  .contact-right {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .contact-right{
+    padding: 0;
+    flex-basis: 60%;
+  }
+
+  .input-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-group {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  label {
+    margin-bottom: 5px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+}
