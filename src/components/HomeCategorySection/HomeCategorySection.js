@@ -10,8 +10,9 @@ function HomeCategorySection() {
     setLoading(true);
     try {
       const response = await axios.get(`${process.env.REACT_APP_URL}/category`);
-      setCategories(response.data);
-      console.log("Categories fetched successfully:", response.data);
+      setCategories(response.data.response.docs);
+      console.log( categories);
+      console.log(response.data);
     } catch (error) {
       console.log("Error fetching categories:", error);
     }
@@ -23,6 +24,8 @@ function HomeCategorySection() {
   }, []);
 
   return (
+    <div>
+    <h1 className="category-header" >Categories</h1>
     <div className="category-container">
       {loading ? (
         <div>Loading categories...</div>
@@ -35,6 +38,7 @@ function HomeCategorySection() {
           );
         })
       ) : null}
+    </div>
     </div>
   );
 }

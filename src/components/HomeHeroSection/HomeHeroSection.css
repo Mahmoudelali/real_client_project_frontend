@@ -53,7 +53,7 @@
 
 @media screen and (max-width: 1100px) {
   .hero-container {
-    height: auto;
+    height: 80vh;
   }
 
   .hero-container::before {
