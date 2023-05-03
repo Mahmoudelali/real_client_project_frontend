@@ -8,6 +8,7 @@ import { Grid } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { isLoading } from '../../App.js';
 const productTitles = [
 	'Name',
 	'Image',
@@ -20,6 +21,8 @@ const productTitles = [
 	'Delete',
 ];
 const Products = () => {
+	const [Loading, setLoading] = useContext(isLoading);
+
 	const handleInputChange = (e) => {
 		setProductData({ ...productData, [e.target.name]: e.target.value });
 	};
@@ -37,6 +40,7 @@ const Products = () => {
 			.then((res) => {
 				console.log(res.data.docs);
 				setProducts(res.data.docs);
+				setLoading(false);
 			});
 	};
 	useEffect(getAllProducts, []);
@@ -44,7 +48,7 @@ const Products = () => {
 	return (
 		// <windowExpand.Provider value={[editViewExpanded, setEditViewExpanded]}>
 		<div className="products-container">
-			{!products ? (
+			{!products || Loading ? (
 				<Loader isComponent={true} />
 			) : (
 				<div>
@@ -70,6 +74,8 @@ const Products = () => {
 										condition,
 									}) => (
 										<Product
+											isLoading={Loading}
+											setIsLoading={setLoading}
 											// setEditViewExpanded={
 											// 	setEditViewExpanded
 											// }

@@ -27,9 +27,11 @@ import Main from './pages/main/Main';
 import VisitorUnauth from './components/visitorUnauth/VisitorUnauth';
 import ProfilePage from './pages/Profile/Profile.jsx';
 import Post from './components/post/Post';
+import DashOrders from './pages/Dashboard/DashOrders.jsx';
 
 export const SidebarStatus = React.createContext();
 export const isLoggedIn = React.createContext();
+export const isLoading = React.createContext();
 
 function App() {
 	const [sidebarExpanded, setSidebarExpanded] = useState(
@@ -38,6 +40,7 @@ function App() {
 
 	const [loggedIn, setLoggedIn] = useState(false);
 	const [isAdmin, setIsAdmin] = useState(false);
+	const [loading, setIsLoading] = useState(false);
 
 	const userIsLoggedIn = () => {
 		axios
@@ -76,89 +79,97 @@ function App() {
 				<SidebarStatus.Provider
 					value={[sidebarExpanded, setSidebarExpanded]}
 				>
-					<BrowserRouter>
-						<Routes>
-							{/* home routes */}
-							<Route path="/" element={<Home />}>
-								<Route path="/" element={<Main />} />
-								<Route
-									path="/register"
-									element={<Register />}
-								/>
-								<Route path="/login" element={<Login />} />
-								<Route path="/post" element={<Post />} />
-								<Route path="/about" element={<AboutUs />} />
-								<Route
-									path="/categories"
-									element={<Categories />}
-								>
+					<isLoading.Provider value={[loading, setIsLoading]}>
+						<BrowserRouter>
+							<Routes>
+								{/* home routes */}
+								<Route path="/" element={<Home />}>
+									<Route path="/" element={<Main />} />
 									<Route
-										path="/categories/category"
-										element={<SubCategories />}
+										path="/register"
+										element={<Register />}
 									/>
-								</Route>
-								<Route
-									path="/contact"
-									element={<ContactUs />}
-								/>
-								<Route
-									path="/instructions"
-									element={<Instruction />}
-								/>
-								<Route path="/orders" element={<Orders />} />
-								<Route
-									path="/profile"
-									element={<ProfilePage />}
-								/>
-								<Route path="/cart" element={<Cart />} />
-							</Route>
-
-							{/* Dashboard routes */}
-
-							{isAdmin && (
-								<Route
-									path="/admin/dashboard"
-									element={
-										<Dashboard
-											loggedIn={loggedIn}
-											setLoggedIn={setLoggedIn}
+									<Route path="/login" element={<Login />} />
+									<Route path="/post" element={<Post />} />
+									<Route
+										path="/about"
+										element={<AboutUs />}
+									/>
+									<Route
+										path="/categories"
+										element={<Categories />}
+									>
+										<Route
+											path="/categories/category"
+											element={<SubCategories />}
 										/>
-									}
-								>
+									</Route>
 									<Route
-										exact
-										path="/admin/dashboard/"
-										element={<DashHome />}
-									></Route>
+										path="/contact"
+										element={<ContactUs />}
+									/>
 									<Route
-										path="/admin/dashboard/settings"
-										element={<Settings />}
-									></Route>
+										path="/instructions"
+										element={<Instruction />}
+									/>
 									<Route
-										path="/admin/dashboard/products"
-										element={<Products />}
-									></Route>
-									<Route
-										path="/admin/dashboard/admins"
-										element={<Admins />}
-									></Route>
-									<Route
-										path="/admin/dashboard/orders"
+										path="/orders"
 										element={<Orders />}
-									></Route>
+									/>
 									<Route
-										path="/admin/dashboard/users"
-										element={<Users />}
-									></Route>
-									<Route
-										path="/admin/dashboard/pending"
-										element={<Pending />}
-									></Route>
+										path="/profile"
+										element={<ProfilePage />}
+									/>
+									<Route path="/cart" element={<Cart />} />
 								</Route>
-							)}
-							<Route path="*" element={<VisitorUnauth />} />
-						</Routes>
-					</BrowserRouter>
+
+								{/* Dashboard routes */}
+
+								{isAdmin && (
+									<Route
+										path="/admin/dashboard"
+										element={
+											<Dashboard
+												loggedIn={loggedIn}
+												setLoggedIn={setLoggedIn}
+											/>
+										}
+									>
+										<Route
+											exact
+											path="/admin/dashboard/"
+											element={<DashHome />}
+										></Route>
+										<Route
+											path="/admin/dashboard/settings"
+											element={<Settings />}
+										></Route>
+										<Route
+											path="/admin/dashboard/products"
+											element={<Products />}
+										></Route>
+										<Route
+											path="/admin/dashboard/admins"
+											element={<Admins />}
+										></Route>
+										<Route
+											path="/admin/dashboard/orders"
+											element={<DashOrders />}
+										></Route>
+										<Route
+											path="/admin/dashboard/users"
+											element={<Users />}
+										></Route>
+										<Route
+											path="/admin/dashboard/pending"
+											element={<Pending />}
+										></Route>
+									</Route>
+								)}
+								<Route path="*" element={<VisitorUnauth />} />
+							</Routes>
+						</BrowserRouter>
+					</isLoading.Provider>
 				</SidebarStatus.Provider>
 			</isLoggedIn.Provider>
 		</div>
