@@ -34,7 +34,7 @@ const Users = () => {
 
 	useEffect(getAllUsers, []);
 	return !users ? (
-		<Loader />
+		<Loader isComponent={true} />
 	) : (
 		<div className="users-container">
 			<div className="users-table-container w-100">

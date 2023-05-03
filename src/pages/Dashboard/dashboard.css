@@ -168,14 +168,15 @@ main {
 	font-weight: 900;
 }
 
+.products-home-section {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 0.2rem;
+}
 .products-home-section,
 .users-home-section {
 	padding: 1rem 0.5rem;
 	margin: 1rem 0;
-
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 0.2rem;
 }
 
 .users-home-section a {
@@ -190,6 +191,7 @@ main {
 
 .products-home-section > article,
 .users-home-section > article {
+	margin-top: 1rem;
 	padding: 1rem;
 	border-radius: 10px;
 }

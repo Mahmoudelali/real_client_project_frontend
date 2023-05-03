@@ -26,6 +26,7 @@ import cookie from 'react-cookies';
 import Main from './pages/main/Main';
 import VisitorUnauth from './components/visitorUnauth/VisitorUnauth';
 import ProfilePage from './pages/Profile/Profile.jsx';
+import Post from './components/post/Post';
 
 export const SidebarStatus = React.createContext();
 export const isLoggedIn = React.createContext();
@@ -49,7 +50,6 @@ function App() {
 						cookie.load('user').role === 'admin' ||
 						cookie.load('user').role === 'superAdmin'
 					) {
-						cookie.save('username', response.data.message.username);
 						setIsAdmin(true);
 					} else {
 						setIsAdmin(false);
@@ -86,6 +86,7 @@ function App() {
 									element={<Register />}
 								/>
 								<Route path="/login" element={<Login />} />
+								<Route path="/post" element={<Post />} />
 								<Route path="/about" element={<AboutUs />} />
 								<Route
 									path="/categories"
@@ -117,7 +118,12 @@ function App() {
 							{isAdmin && (
 								<Route
 									path="/admin/dashboard"
-									element={<Dashboard />}
+									element={
+										<Dashboard
+											loggedIn={loggedIn}
+											setLoggedIn={setLoggedIn}
+										/>
+									}
 								>
 									<Route
 										exact

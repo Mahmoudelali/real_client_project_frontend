@@ -45,28 +45,12 @@ const Products = () => {
 		// <windowExpand.Provider value={[editViewExpanded, setEditViewExpanded]}>
 		<div className="products-container">
 			{!products ? (
-				<Loader />
+				<Loader isComponent={true} />
 			) : (
 				<div>
 					<h2 className="title center">PRODUCTS</h2>
 					<table>
 						<thead>
-							<tr>
-								<td colSpan={2} style={{ border: '0' }}>
-									<span>
-										<strong>Toatal</strong> :{' '}
-										{products.length}
-									</span>
-								</td>
-								<td colSpan={2} style={{ border: '0' }}>
-									<strong>On Page</strong> :{' '}
-									{
-										products.filter((item) => {
-											return item.onPage === true;
-										}).length
-									}
-								</td>
-							</tr>
 							<tr>
 								{productTitles.map((title, index) => {
 									return <th key={index}>{title}</th>;
@@ -111,13 +95,13 @@ const Products = () => {
 									</th>
 								</tr>
 							)}
+						</tbody>
+						<tfoot>
 							<tr>
 								<td
 									style={{
-										backgroundColor: 'lightgray',
 										border: 0,
 									}}
-									colSpan={9}
 								>
 									<NavLink to={'/admin/dashboard/add'}>
 										<button
@@ -130,11 +114,27 @@ const Products = () => {
 											<Grid item xs={1}>
 												<AddIcon />
 											</Grid>
+											Add New Product
 										</button>
 									</NavLink>
 								</td>
+
+								<td colSpan={2} style={{ border: '0' }}>
+									<span>
+										<strong>Toatal</strong> :{' '}
+										{products.length}
+									</span>
+								</td>
+								<td colSpan={2} style={{ border: '0' }}>
+									<strong>On Page</strong> :{' '}
+									{
+										products.filter((item) => {
+											return item.onPage === true;
+										}).length
+									}
+								</td>
 							</tr>
-						</tbody>
+						</tfoot>
 					</table>
 				</div>
 			)}

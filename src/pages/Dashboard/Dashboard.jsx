@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 import { SidebarStatus } from '../../App.js';
 import './dashboard.css';
+import cookie from 'react-cookies';
 
 // icons
 import { Grid } from '@mui/material';
@@ -14,6 +15,8 @@ import GroupIcon from '@mui/icons-material/Group';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import PendingIcon from '@mui/icons-material/Pending';
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import axios from 'axios';
 
 const sideLinks = [
 	{
@@ -41,10 +44,17 @@ const sideLinks = [
 		path: '/admin/dashboard/pending',
 		name: 'Pending',
 	},
-	
+
+	{
+		icon: <HandshakeIcon />,
+		path: '/admin/dashboard/orders',
+		name: 'Orders',
+	}
+
 ];
-const Dashboard = () => {
+const Dashboard = ({ loggedIn, setLoggedIn }) => {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(SidebarStatus);
+	const username = cookie.load('user').username;
 
 	return (
 		<div className="dashboard-container">
@@ -67,7 +77,7 @@ const Dashboard = () => {
 			>
 				<div className="greetings">
 					<h1>Khizana</h1>
-					<h2>hello, name</h2>
+					<h2>hello, {username}</h2>
 				</div>
 
 				<div className="side-links-container">
@@ -90,8 +100,13 @@ const Dashboard = () => {
 					})}
 				</div>
 				<NavLink
+					onClick={() => {
+						cookie.remove('user');
+						cookie.remove('auth_token');
+						setLoggedIn(!loggedIn);
+					}}
 					className={'logout-btn'}
-					to={'/admin/dashboard/logout'}
+					to={'/'}
 				>
 					<Grid item xs={1}>
 						<LogoutIcon />

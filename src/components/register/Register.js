@@ -154,6 +154,7 @@ function Register() {
                     name="image"
                     accept="image/png, image/jpeg"
                     className="register-input"
+                    required
                 />
                 {err !== "" && err && (
                     <div
