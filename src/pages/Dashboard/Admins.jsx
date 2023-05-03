@@ -123,7 +123,7 @@ const Admins = () => {
 
 							<td style={{ display: 'flex' }}>
 								<button
-									className="btn "
+									className="btn accent-color "
 									onClick={() => {
 										console.log(admin_window_expanded);
 										set_admin_window_expanded(
