@@ -4,7 +4,9 @@
 	box-sizing: border-box;
 	border-spacing: 0;
 }
-
+.accent-Color {
+	color: var(--accent) !important;
+}
 :root {
 	--primary: #ffffff;
 	--secondary: #000000;
@@ -208,6 +210,7 @@ main {
 
 /* table */
 /* table */
+.orders-container table,
 .products-container table,
 .users-table-container table {
 	width: 80%;
@@ -217,7 +220,7 @@ main {
 	font-size: 14px;
 	line-height: 1.5;
 }
-
+.orders-container table thead tr th,
 .products-container table thead tr th,
 .users-table-container table thead tr th {
 	font-family: 'Roboto', sans-serif !important;
@@ -228,40 +231,49 @@ main {
 	color: var(--primary) !important;
 	font-size: 16px;
 }
-
+.orders-container th,
 .products-container th,
 .users-table-container th,
+.orders-container td,
 .users-table-container td,
 .products-container td {
 	color: gray !important;
 	padding: 15px 20px;
 	text-align: center !important;
 }
-
+.orders-container th,
 .products-container th,
 .users-table-container th {
 	font-weight: bold;
 	background-color: #f2f2f2;
 }
+
 .users-table-container th button {
 	padding: 1rem 1.5rem;
 }
-
+.orders-container tr:nth-child(even),
 .products-container tr:nth-child(even),
 .users-table-container tr:nth-child(even) {
 	background-color: #f1f1f1;
 }
+
 .delete-icon,
 .edit-icon {
 	transition: 0.4s !important;
 }
-.delete-icon:hover {
+.delete-icon {
 	color: #dc3545 !important;
+}
+.delete-icon:hover {
+	color: #000 !important;
+}
+.success-icon {
+	color: #5cb85c !important;
 }
 .edit-icon:hover {
 	color: blueviolet !important;
 }
-
+.orders-container,
 .users-container,
 .products-container {
 	/* background-color: red; */
