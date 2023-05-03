@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import '../Styles/Switcher.css';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { isLoading } from '../App.js';
 
 const Switcher = ({
 	isSuper,
@@ -13,6 +14,7 @@ const Switcher = ({
 	getAllUsers,
 }) => {
 	const nodeEnv = process.env.REACT_APP_URL;
+	const [Loading, setLoading] = useContext(isLoading);
 
 	const handleEditVisibility = () => {
 		axios
@@ -26,9 +28,11 @@ const Switcher = ({
 				},
 			)
 			.then((res) => {
-				console.log(res);
-
-				getAllProducts();
+				if (res.status === 200) {
+					getAllProducts();
+					setLoading(false);
+					console.log(res);
+				}
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -66,7 +70,11 @@ const Switcher = ({
 					cursor: 'pointer',
 				}}
 				// {}
-				onClick={setAdmin ? handleEditAdmin : handleEditVisibility}
+				onClick={() => {
+					setLoading(!Loading);
+					console.log(Loading);
+					setAdmin ? handleEditAdmin() : handleEditVisibility();
+				}}
 			></div>
 		</div>
 	);
