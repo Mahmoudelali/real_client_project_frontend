@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import Cookies from 'js-cookie';
 
 const AddAdmin = ({
+	title,
 	endPoint,
 	getAllAdmins,
 	display,
@@ -40,82 +41,85 @@ const AddAdmin = ({
 	};
 
 	return (
-		<form
-			encType="multipart/form-data"
+		<div
+			className="admin-form-container"
 			style={{
-				backgroundColor: 'powderblue',
-				display: display ? 'block' : 'none',
+				display: display ? 'flex' : 'none',
 			}}
 		>
-			<button
-				onClick={(e) => {
-					e.preventDefault();
-					set_admin_window_expanded(!admin_window_expanded);
-				}}
-			>
-				<Grid x={1}>
-					<CloseIcon />
-				</Grid>
-			</button>
+			<form className="admin-form" encType="multipart/form-data">
+				<button
+					className="btn"
+					onClick={(e) => {
+						e.preventDefault();
+						set_admin_window_expanded(!admin_window_expanded);
+					}}
+				>
+					<Grid x={1}>
+						<CloseIcon />
+					</Grid>
+				</button>
+				<h2 className="title">{title}</h2>
+				<label className="block" htmlFor="username">
+					<span>Username</span>
+					<input
+						onChange={handleInputChange}
+						className="block w-100   input"
+						type="text"
+						id="username"
+						name="username"
+					/>
+				</label>
 
-			<label className="block" htmlFor="username">
-				Username
-				<input
-					onChange={handleInputChange}
-					className="block"
-					type="text"
-					id="username"
-					name="username"
-				/>
-			</label>
+				<label className="block" htmlFor="password">
+					<span>password </span>
+					<input
+						onChange={handleInputChange}
+						className="block w-100  input"
+						type="password"
+						id="password"
+						name="password"
+					/>
+				</label>
 
-			<label className="block" htmlFor="password">
-				password
-				<input
-					onChange={handleInputChange}
-					className="block"
-					type="password"
-					id="password"
-					name="password"
-				/>
-			</label>
+				<label className="block" htmlFor="email">
+					<span>email </span>
+					<input
+						onChange={handleInputChange}
+						className="block w-100 input "
+						type="text"
+						id="email"
+						name="email"
+					/>
+				</label>
 
-			<label className="block" htmlFor="email">
-				email
-				<input
-					onChange={handleInputChange}
-					className="block"
-					type="text"
-					id="email"
-					name="email"
-				/>
-			</label>
+				<label htmlFor="number">
+					<span>Number </span>
+					<input
+						className="w-100 input "
+						onChange={handleInputChange}
+						type="text"
+						name="phone"
+						id="number"
+					/>
+				</label>
 
-			<label htmlFor="number">
-				Number
-				<input
-					onChange={handleInputChange}
-					type="text"
-					name="phone"
-					id="number"
-				/>
-			</label>
+				<label className="block" htmlFor="image">
+					<span>image</span>
+					<input
+						onChange={handleInputChange}
+						className="block w-100 input "
+						type="file"
+						id="image"
+						name="image"
+					/>
+				</label>
 
-			<label className="block" htmlFor="image">
-				image
-				<input
-					onChange={handleInputChange}
-					className="block"
-					type="file"
-					id="image"
-					name="image"
-				/>
-			</label>
-
-			<button onClick={handleAddAdmin} className="btn">
-				Add New Admin{' '}
-			</button>
-		</form>
+				<button onClick={handleAddAdmin} className="btn submit-btn">
+					Add New Admin{' '}
+				</button>
+			</form>
+		</div>
 	);
 };
 
