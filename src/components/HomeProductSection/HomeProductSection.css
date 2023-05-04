@@ -33,3 +33,7 @@
   .card button:hover {
     background-color: var(--accent);
   }
+  .product-home-title{
+    text-align: center;
+    margin-bottom: 20px;
+  }
