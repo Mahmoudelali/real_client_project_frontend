@@ -7,15 +7,15 @@ import { isLoading } from '../../App.js';
 
 const DashOrders = () => {
 	const orderTableTitles = [
-		'orderedBy',
-		'email',
-		'address',
-		'product',
-		'total',
-		'state',
-		'manage',
+		'OrderedBy',
+		'Email',
+		'Address',
+		'Product',
+		'Total',
+		'State',
+		'Manage',
 		'message',
-		'_id',
+		'id',
 		'delete',
 	];
 	const [loading, setLoading] = useContext(isLoading);
@@ -48,7 +48,7 @@ const DashOrders = () => {
 				<thead>
 					<tr>
 						{orderTableTitles.map((title, index) => {
-							return <th key={index}>{title}</th>;
+							return <th key={index}>{title.toUpperCase()}</th>;
 						})}
 					</tr>
 				</thead>

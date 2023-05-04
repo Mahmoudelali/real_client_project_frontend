@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import Loader from '../../components/Loader.jsx';
 import User from '../../components/User.jsx';
@@ -6,8 +6,14 @@ import { Grid } from '@mui/material';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AddAdmin from '../../components/AddAdmin.jsx';
 import Cookies from 'js-cookie';
+import { isLoading } from '../../App.js';
 
 const Admins = () => {
+	const [loading, setLoading] = useContext(isLoading);
+	const [users, setUsers] = useState(null);
+	const [admin_window_expanded, set_admin_window_expanded] = useState(false);
+	const [endPoint, setEndPoint] = useState('/add-admin');
+
 	const getAllAdmins = () => {
 		axios
 			.get(`${process.env.REACT_APP_URL}/user/`, {
@@ -18,15 +24,12 @@ const Admins = () => {
 			.then((res) => {
 				console.log(res.data.response.docs);
 				setUsers(res.data.response.docs);
+				setLoading(false);
 			})
 			.catch((err) => {
 				console.log(err.message);
 			});
 	};
-
-	const [users, setUsers] = useState(null);
-	const [admin_window_expanded, set_admin_window_expanded] = useState(false);
-	const [endPoint, setEndPoint] = useState('/add-admin');
 
 	const tableTitles = [
 		'Username',
@@ -36,12 +39,11 @@ const Admins = () => {
 		'Role',
 		'Phone',
 		'country Code',
-
 		'Delete',
 	];
 	useEffect(getAllAdmins, []);
 
-	return !users ? (
+	return !users || loading ? (
 		<Loader isComponent={true} />
 	) : (
 		<div className="users-container">
@@ -63,10 +65,7 @@ const Admins = () => {
 						{users &&
 							users
 								.filter((member) => {
-									return (
-										member.role === 'admin' ||
-										member.role === 'superAdmin'
-									);
+									return member.role !== 'user';
 								})
 								.map(
 									({
@@ -109,6 +108,7 @@ const Admins = () => {
 									onClick={() => {
 										console.log(admin_window_expanded);
 										setEndPoint('/add-super-admin');
+										console.log(endPoint);
 										set_admin_window_expanded(
 											!admin_window_expanded,
 										);
@@ -125,7 +125,9 @@ const Admins = () => {
 								<button
 									className="btn accent-color "
 									onClick={() => {
+										setEndPoint('/add-admin');
 										console.log(admin_window_expanded);
+										console.log(endPoint);
 										set_admin_window_expanded(
 											!admin_window_expanded,
 										);
@@ -139,7 +141,12 @@ const Admins = () => {
 							</td>
 							<td colSpan={5}></td>
 							<td>
-								<strong>Total </strong>: {users.length}
+								<strong>Total </strong>:{' '}
+								{
+									users.filter((admin) => {
+										return admin.role !== 'user';
+									}).length
+								}
 							</td>
 						</tr>
 					</tbody>
@@ -148,6 +155,9 @@ const Admins = () => {
 
 			<AddAdmin
 				endPoint={endPoint}
+				title={
+					endPoint == '/add-admin' ? 'Add Admin' : 'Add Super Admin'
+				}
 				getAllAdmins={getAllAdmins}
 				display={admin_window_expanded}
 				admin_window_expanded={admin_window_expanded}

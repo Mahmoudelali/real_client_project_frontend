@@ -41,11 +41,15 @@ const Switcher = ({
 
 	const handleEditAdmin = () => {
 		axios
-			.put(`${nodeEnv}/user/edit/${_id}`, {
-				headers: {
-					auth_token: `${Cookies.get('auth_token')}`,
+			.put(
+				`${nodeEnv}/user/edit/${_id}`,
+				isSuper ? { role: 'superAdmin' } : { role: 'admin' },
+				{
+					headers: {
+						auth_token: `${Cookies.get('auth_token')}`,
+					},
 				},
-			})
+			)
 			.then((res) => {
 				console.log(res);
 				res.status === 200 && setIsSuper(!isSuper);
@@ -71,7 +75,7 @@ const Switcher = ({
 				}}
 				// {}
 				onClick={() => {
-					setLoading(!Loading);
+					setLoading(true);
 					console.log(Loading);
 					setAdmin ? handleEditAdmin() : handleEditVisibility();
 				}}

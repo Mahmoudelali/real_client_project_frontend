@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Grid } from '@mui/material';
 import Cookies from 'js-cookie';
 import Switcher from './Switcher';
+import { isLoading } from '../App.js';
 var urlEnv = process.env.REACT_APP_URL;
 const User = ({
 	phone,
@@ -17,7 +18,7 @@ const User = ({
 	countryCallingCode,
 	adminsView,
 }) => {
-	const [processing, setProcessing] = useState(false);
+	const [loading, setLoading] = useContext(isLoading);
 	const [isSuper, setIsSuper] = useState(
 		role === 'superAdmin' ? true : false,
 	);
@@ -31,6 +32,7 @@ const User = ({
 			.then((res) => {
 				console.log(res);
 				getAllUsers();
+				setLoading(false);
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -50,6 +52,7 @@ const User = ({
 						setAdmin={true}
 						isSuper={isSuper}
 						setIsSuper={setIsSuper}
+						getAllUsers={getAllUsers}
 					/>
 				</td>
 			)}
@@ -72,7 +75,10 @@ const User = ({
 			<td>
 				<button
 					className="delete-user delete-icon btn"
-					onClick={handleDeleteUser}
+					onClick={() => {
+						setLoading(true);
+						handleDeleteUser();
+					}}
 					// style={{ all: 'unset' }}
 				>
 					<Grid x={1}>
