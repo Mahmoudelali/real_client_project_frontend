@@ -5,6 +5,7 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { isLoading } from '../App.js';
+import Loader from './Loader.jsx';
 const OrderRow = ({
 	getAllOrders,
 	product,
@@ -57,22 +58,27 @@ const OrderRow = ({
 	};
 	const handleEditOrder = (_id) => {
 		axios
-			.put(`${nodeEnv}/order/${_id}`, {
-				headers: {
-					auth_token: Cookies.get('auth_token'),
+			.put(
+				`${nodeEnv}/order/${_id}`,
+				{ state: 'created' },
+				{
+					headers: {
+						auth_token: Cookies.get('auth_token'),
+					},
 				},
-			})
+			)
 			.then((response) => {
 				console.log(response);
+				setLoading(false);
+				getAllOrders();
 			})
 			.catch((error) => {
-				console.log(error.message);
+				console.log(error);
 			});
 		getAllOrders();
 	};
-	
 
-	return (
+	return(
 		<tr>
 			<td>{username}</td>
 			<td>
@@ -92,6 +98,7 @@ const OrderRow = ({
 						>
 							<option>{state}</option>
 							<option value="created">Created</option>
+							<option value="pending">Pending</option>
 							<option value="processing">Processing</option>
 							<option value="shipped">Shipped</option>
 							<option value="cancelled">Cancelled</option>
@@ -106,6 +113,7 @@ const OrderRow = ({
 					<button
 						className="btn success-icon"
 						onClick={() => {
+							setLoading(true);
 							handleEditOrder(_id);
 						}}
 					>
@@ -120,6 +128,7 @@ const OrderRow = ({
 				<button
 					className=" btn delete-icon"
 					onClick={() => {
+						setLoading(true);
 						handleDeleteOrder(_id);
 					}}
 				>

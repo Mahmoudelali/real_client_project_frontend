@@ -281,6 +281,10 @@ main {
 }
 .success-icon {
 	color: #5cb85c !important;
+	transition: 0.2s !important;
+}
+.success-icon:hover {
+	color: var(--accent) !important;
 }
 .edit-icon:hover {
 	color: blueviolet !important;
