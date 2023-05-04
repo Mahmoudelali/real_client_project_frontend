@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Cookies from 'js-cookie';
 import axios from 'axios';
 
 import Loader from '../../components/Loader';
 import '../Dashboard/dashboard.css';
 import OrderRow from '../../components/OrderRow';
+import { isLoading } from '../../App';
 
 const Pending = () => {
 	const orderTableTitles = [
@@ -20,7 +21,7 @@ const Pending = () => {
 	];
 	const nodeEnv = process.env.REACT_APP_URL;
 	const [pendingOrders, setPendingOrders] = useState(null);
-
+	const [loading, setLoading] = useContext(isLoading);
 	const getAllOrders = () => {
 		axios
 			.get(`${nodeEnv}/order`, {
@@ -42,7 +43,7 @@ const Pending = () => {
 	};
 
 	useEffect(getAllOrders, []);
-	return !pendingOrders ? (
+	return !pendingOrders || loading ? (
 		<Loader isComponent={true} />
 	) : (
 		<div className="orders-container">

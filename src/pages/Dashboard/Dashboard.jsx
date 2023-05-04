@@ -3,6 +3,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 import { SidebarStatus } from '../../App.js';
 import './dashboard.css';
 import cookie from 'react-cookies';
+import Cookies from 'js-cookie';
 
 // icons
 import { Grid } from '@mui/material';
@@ -54,6 +55,7 @@ const sideLinks = [
 const Dashboard = ({ loggedIn, setLoggedIn }) => {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(SidebarStatus);
 	const username = cookie.load('user').username;
+	const userData = JSON.parse(Cookies.get('user'));
 
 	return (
 		<div className="dashboard-container">
@@ -80,23 +82,49 @@ const Dashboard = ({ loggedIn, setLoggedIn }) => {
 				</div>
 
 				<div className="side-links-container">
-					{sideLinks.map(({ icon, path, name }, index) => {
-						return (
-							<NavLink
-								key={index}
-								to={path}
-								onClick={() => {
-									window.screen.width < 468 &&
-										setSidebarExpanded(!sidebarExpanded);
-								}}
-							>
-								<Grid item xs={1}>
-									{icon}
-								</Grid>
-								{name}
-							</NavLink>
-						);
-					})}
+					{userData.role !== 'admin'
+						? sideLinks.map(({ icon, path, name }, index) => {
+								return (
+									<NavLink
+										key={index}
+										to={path}
+										onClick={() => {
+											window.screen.width < 468 &&
+												setSidebarExpanded(
+													!sidebarExpanded,
+												);
+										}}
+									>
+										<Grid item xs={1}>
+											{icon}
+										</Grid>
+										{name}
+									</NavLink>
+								);
+						  })
+						: sideLinks
+								.filter((link) => {
+									return link.name != 'Admins';
+								})
+								.map(({ name, icon, path }, index) => {
+									return (
+										<NavLink
+											key={index}
+											to={path}
+											onClick={() => {
+												window.screen.width < 468 &&
+													setSidebarExpanded(
+														!sidebarExpanded,
+													);
+											}}
+										>
+											<Grid item xs={1}>
+												{icon}
+											</Grid>
+											{name}
+										</NavLink>
+									);
+								})}
 				</div>
 				<NavLink
 					onClick={() => {

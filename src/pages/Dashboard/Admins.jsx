@@ -7,12 +7,15 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AddAdmin from '../../components/AddAdmin.jsx';
 import Cookies from 'js-cookie';
 import { isLoading } from '../../App.js';
+import SearchIcon from '@mui/icons-material/Search';
 
 const Admins = () => {
+	const userData = JSON.parse(Cookies.get('user'));
 	const [loading, setLoading] = useContext(isLoading);
 	const [users, setUsers] = useState(null);
 	const [admin_window_expanded, set_admin_window_expanded] = useState(false);
 	const [endPoint, setEndPoint] = useState('/add-admin');
+	const [search, setSearch] = useState('');
 
 	const getAllAdmins = () => {
 		axios
@@ -49,6 +52,7 @@ const Admins = () => {
 		<div className="users-container">
 			<div className="users-table-container w-100">
 				<h2 className="title center">Admins Table</h2>
+				
 				<table style={{ margin: '0 auto' }}>
 					<thead>
 						<tr>
@@ -66,6 +70,13 @@ const Admins = () => {
 							users
 								.filter((member) => {
 									return member.role !== 'user';
+								})
+								.filter((admin) => {
+									return search.toLocaleLowerCase() === ''
+										? admin
+										: admin.username
+												.toLowerCase()
+												.includes(search);
 								})
 								.map(
 									({
@@ -102,43 +113,46 @@ const Admins = () => {
 									),
 								)}
 						<tr>
-							<td>
-								<button
-									className="btn "
-									onClick={() => {
-										console.log(admin_window_expanded);
-										setEndPoint('/add-super-admin');
-										console.log(endPoint);
-										set_admin_window_expanded(
-											!admin_window_expanded,
-										);
-									}}
-								>
-									<Grid item xs={1}>
-										<AdminPanelSettingsIcon />
-									</Grid>
-									<strong>New Super Admin</strong>
-								</button>
-							</td>
+							{userData.role == 'superAdmin' && (
+								<td>
+									<button
+										className="btn "
+										onClick={() => {
+											setEndPoint('/add-super-admin');
 
-							<td style={{ display: 'flex' }}>
-								<button
-									className="btn accent-color "
-									onClick={() => {
-										setEndPoint('/add-admin');
-										console.log(admin_window_expanded);
-										console.log(endPoint);
-										set_admin_window_expanded(
-											!admin_window_expanded,
-										);
-									}}
-								>
-									<Grid item xs={1}>
-										<AdminPanelSettingsIcon />
-									</Grid>
-									<strong>New Admin</strong>
-								</button>
-							</td>
+											set_admin_window_expanded(
+												!admin_window_expanded,
+											);
+										}}
+									>
+										<Grid item xs={1}>
+											<AdminPanelSettingsIcon />
+										</Grid>
+										<strong>New Super Admin</strong>
+									</button>
+								</td>
+							)}
+							{userData.role == 'superAdmin' && (
+								<td style={{ display: 'flex' }}>
+									<button
+										className="btn accent-color "
+										onClick={() => {
+											setEndPoint('/add-admin');
+											console.log(admin_window_expanded);
+											console.log(endPoint);
+											set_admin_window_expanded(
+												!admin_window_expanded,
+											);
+										}}
+									>
+										<Grid item xs={1}>
+											<AdminPanelSettingsIcon />
+										</Grid>
+										<strong>New Admin</strong>
+									</button>
+								</td>
+							)}
+
 							<td colSpan={5}></td>
 							<td>
 								<strong>Total </strong>:{' '}
