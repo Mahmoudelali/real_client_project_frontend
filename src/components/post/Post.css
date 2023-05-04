@@ -1,3 +1,9 @@
+.post-successful {
+  text-align: center;
+  margin: 1pc;
+  padding: 20vh 0;
+}
+
 .post-title {
   margin: 1pc 0;
 }
@@ -64,6 +70,13 @@
 }
 
 @media screen and (min-width: 1000px) {
+  .post-successful {
+    font-size: xxx-large;
+    text-align: center;
+    margin: 1pc;
+    padding: 21vh 0;
+  }
+
   .post-form {
     box-shadow: 0px 0px 20px -6px rgba(64, 64, 64, 1);
   }

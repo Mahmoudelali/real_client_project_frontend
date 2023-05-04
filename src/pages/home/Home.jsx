@@ -3,7 +3,7 @@ import "./home.css";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
-import AddCircleTwoToneIcon from "@mui/icons-material/AddCircleTwoTone";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { isLoggedIn } from "../../App";
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
       <Outlet />
       {loggedIn && location.pathname !== "/post" && (
         <Link to="/post">
-          <AddCircleTwoToneIcon className="home-add" />
+          <AddCircleOutlineIcon className="home-add" />
         </Link>
       )}
       <Footer />
