@@ -1,12 +1,25 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./HomeProductSection.css";
 import axios from "axios";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-import ShoppingCart from "../ShoppingCart/ShoppingCart.js";
 function HomeProductSection() {
+  const [productsInCart, setProducts] = useState(
+    JSON.parse(localStorage.getItem("shopping-cart")) || []
+  );
+  useEffect(() => {
+    localStorage.setItem("shopping-cart", JSON.stringify(productsInCart));
+  }, [productsInCart]);
+
+  const addProductToCart = (product) => {
+    const newProduct = {
+      ...product,
+      count: 1,
+    };
+    setProducts([...productsInCart, newProduct]);
+  };
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -85,7 +98,13 @@ function HomeProductSection() {
               <p className="price">{product.price}$</p>
               <p>{product.description}</p>
               <p>
-                <button>add to cart </button>
+                <button
+                  onClick={() => {
+                    addProductToCart(product);
+                  }}
+                >
+                  add to cart{" "}
+                </button>
               </p>
             </div>
           ))}
