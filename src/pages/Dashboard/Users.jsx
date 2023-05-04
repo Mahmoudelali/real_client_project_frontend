@@ -15,6 +15,7 @@ const Users = () => {
 		'Delete',
 	];
 	const [users, setUsers] = useState(null);
+	const [search, setSearch] = useState('');
 
 	const getAllUsers = () => {
 		axios
@@ -39,6 +40,21 @@ const Users = () => {
 		<div className="users-container">
 			<div className="users-table-container w-100">
 				<h2 className="title center">Users Table</h2>
+				<form style={{ marginBottom: '10px' }}>
+					<input
+						placeholder="Search"
+						type="text"
+						className="input"
+						style={{
+							width: '20%',
+							display: 'block',
+							margin: '0 auto',
+						}}
+						onChange={(e) => {
+							setSearch(e.target.value);
+						}}
+					/>
+				</form>
 				<table style={{ margin: '0 auto' }}>
 					<thead>
 						<tr>
@@ -53,30 +69,47 @@ const Users = () => {
 					</thead>
 					<tbody>
 						{users &&
-							users.map(
-								({
-									role,
-									phone,
-									country,
-									username,
-									email,
-									_id,
-									isAdmin,
-								}) => (
-									<User
-										adminsView={false}
-										getAllUsers={getAllUsers}
-										role={role}
-										phone={phone}
-										country={country}
-										key={_id}
-										username={username}
-										email={email}
-										_id={_id}
-										isAdmin={isAdmin}
-									/>
-								),
-							)}
+							users
+								.filter((user) => {
+									return search.toLocaleLowerCase() === ''
+										? user
+										: user.username
+												.toLowerCase()
+												.includes(search) ||
+												user.email
+													.toLowerCase()
+													.includes(search) ||
+												user.role
+													.toLowerCase()
+													.includes(search) ||
+												user.phone
+													.toLowerCase()
+													.includes(search);
+								})
+								.map(
+									({
+										role,
+										phone,
+										country,
+										username,
+										email,
+										_id,
+										isAdmin,
+									}) => (
+										<User
+											adminsView={false}
+											getAllUsers={getAllUsers}
+											role={role}
+											phone={phone}
+											country={country}
+											key={_id}
+											username={username}
+											email={email}
+											_id={_id}
+											isAdmin={isAdmin}
+										/>
+									),
+								)}
 						<tr>
 							<td colSpan={8}>
 								{' '}

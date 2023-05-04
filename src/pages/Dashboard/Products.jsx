@@ -31,6 +31,7 @@ const Products = () => {
 	const [products, setProducts] = useState(null);
 	// const [editViewExpanded, setEditViewExpanded] = useContext(windowExpand);
 	const [productData, setProductData] = useState({});
+	const [search, setSearch] = useState('');
 
 	const getAllProducts = () => {
 		axios
@@ -53,6 +54,21 @@ const Products = () => {
 			) : (
 				<div>
 					<h2 className="title center">PRODUCTS</h2>
+					<form style={{ marginBottom: '10px' }}>
+						<input
+							placeholder="Search"
+							type="text"
+							className="input"
+							style={{
+								width: '20%',
+								display: 'block',
+								margin: '0 auto',
+							}}
+							onChange={(e) => {
+								setSearch(e.target.value);
+							}}
+						/>
+					</form>
 					<table>
 						<thead>
 							<tr>
@@ -63,34 +79,51 @@ const Products = () => {
 						</thead>
 						<tbody>
 							{products ? (
-								products.map(
-									({
-										title,
-										price,
-										image,
-										_id,
-										onPage,
-										category,
-										condition,
-									}) => (
-										<Product
-											isLoading={Loading}
-											setIsLoading={setLoading}
-											// setEditViewExpanded={
-											// 	setEditViewExpanded
-											// }
-											getAllProducts={getAllProducts}
-											onPage={onPage ? onPage : null}
-											key={_id}
-											category={category}
-											title={title}
-											price={price}
-											image={image}
-											_id={_id}
-											condition={condition}
-										/>
-									),
-								)
+								products
+									.filter((user) => {
+										return search.toLocaleLowerCase() === ''
+											? user
+											: user.title
+													.toLowerCase()
+													.includes(search) ||
+													user.condition
+														.toLowerCase()
+														.includes(search) ||
+													user.description
+														.toLowerCase()
+														.includes(search) ||
+													user.state
+														.toLowerCase()
+														.includes(search);
+									})
+									.map(
+										({
+											title,
+											price,
+											image,
+											_id,
+											onPage,
+											category,
+											condition,
+										}) => (
+											<Product
+												isLoading={Loading}
+												setIsLoading={setLoading}
+												// setEditViewExpanded={
+												// 	setEditViewExpanded
+												// }
+												getAllProducts={getAllProducts}
+												onPage={onPage ? onPage : null}
+												key={_id}
+												category={category}
+												title={title}
+												price={price}
+												image={image}
+												_id={_id}
+												condition={condition}
+											/>
+										),
+									)
 							) : (
 								<tr>
 									<th colSpan={8}>

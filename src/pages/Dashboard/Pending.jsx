@@ -21,6 +21,7 @@ const Pending = () => {
 	];
 	const nodeEnv = process.env.REACT_APP_URL;
 	const [pendingOrders, setPendingOrders] = useState(null);
+	const [search, setSearch] = useState('');
 	const [loading, setLoading] = useContext(isLoading);
 	const getAllOrders = () => {
 		axios
@@ -48,6 +49,21 @@ const Pending = () => {
 	) : (
 		<div className="orders-container">
 			<h2 className="title center">Pending Orders</h2>
+			<form style={{ marginBottom: '10px' }}>
+				<input
+					placeholder="Search"
+					type="text"
+					className="input"
+					style={{
+						width: '20%',
+						display: 'block',
+						margin: '0 auto',
+					}}
+					onChange={(e) => {
+						setSearch(e.target.value);
+					}}
+				/>
+			</form>
 			<table>
 				<thead>
 					<tr>

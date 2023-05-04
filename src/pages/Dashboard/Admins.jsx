@@ -7,7 +7,6 @@ import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import AddAdmin from '../../components/AddAdmin.jsx';
 import Cookies from 'js-cookie';
 import { isLoading } from '../../App.js';
-import SearchIcon from '@mui/icons-material/Search';
 
 const Admins = () => {
 	const userData = JSON.parse(Cookies.get('user'));
@@ -33,6 +32,7 @@ const Admins = () => {
 				console.log(err.message);
 			});
 	};
+	useEffect(getAllAdmins, []);
 
 	const tableTitles = [
 		'Username',
@@ -44,7 +44,6 @@ const Admins = () => {
 		'country Code',
 		'Delete',
 	];
-	useEffect(getAllAdmins, []);
 
 	return !users || loading ? (
 		<Loader isComponent={true} />
@@ -52,7 +51,21 @@ const Admins = () => {
 		<div className="users-container">
 			<div className="users-table-container w-100">
 				<h2 className="title center">Admins Table</h2>
-				
+				<form style={{ marginBottom: '10px' }}>
+					<input
+						placeholder="Search"
+						type="text"
+						className="input"
+						style={{
+							width: '20%',
+							display: 'block',
+							margin: '0 auto',
+						}}
+						onChange={(e) => {
+							setSearch(e.target.value);
+						}}
+					/>
+				</form>
 				<table style={{ margin: '0 auto' }}>
 					<thead>
 						<tr>
@@ -76,7 +89,16 @@ const Admins = () => {
 										? admin
 										: admin.username
 												.toLowerCase()
-												.includes(search);
+												.includes(search) ||
+												admin.email
+													.toLowerCase()
+													.includes(search) ||
+												admin.role
+													.toLowerCase()
+													.includes(search) ||
+												admin.phone
+													.toLowerCase()
+													.includes(search);
 								})
 								.map(
 									({

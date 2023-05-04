@@ -21,6 +21,7 @@ const DashOrders = () => {
 	const [loading, setLoading] = useContext(isLoading);
 	const nodeEnv = process.env.REACT_APP_URL;
 	const [orders, setOrders] = useState(null);
+	const [search, setSearch] = useState('');
 	const getAllOrders = () => {
 		axios
 			.get(`${nodeEnv}/order`, {
@@ -44,6 +45,21 @@ const DashOrders = () => {
 	) : (
 		<div className="orders-container">
 			<h2 className="title center">Orders</h2>
+			<form style={{ marginBottom: '10px' }}>
+				<input
+					placeholder="Search"
+					type="text"
+					className="input"
+					style={{
+						width: '20%',
+						display: 'block',
+						margin: '0 auto',
+					}}
+					onChange={(e) => {
+						setSearch(e.target.value);
+					}}
+				/>
+			</form>
 			<table>
 				<thead>
 					<tr>
