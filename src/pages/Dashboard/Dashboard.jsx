@@ -49,8 +49,7 @@ const sideLinks = [
 		icon: <HandshakeIcon />,
 		path: '/admin/dashboard/orders',
 		name: 'Orders',
-	}
-
+	},
 ];
 const Dashboard = ({ loggedIn, setLoggedIn }) => {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(SidebarStatus);

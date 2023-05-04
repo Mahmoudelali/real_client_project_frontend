@@ -19,26 +19,26 @@ const OrderRow = ({
 }) => {
 	const nodeEnv = process.env.REACT_APP_URL;
 	const [loading, setLoading] = useContext(isLoading);
-	const [orderState, setOrderState] = useState(null);
 
 	const handleInputChange = (e) => {
-		setOrderState({ [e.target.name]: e.target.value });
-		// const handleEditOrderState = () => {
 		setLoading(true);
 		axios
-			.put(`${nodeEnv}/order/${_id}`, orderState, {
-				headers: {
-					auth_token: Cookies.get('auth_token'),
+			.put(
+				`${nodeEnv}/order/${_id}`,
+				{ state: e.target.value },
+				{
+					headers: {
+						auth_token: Cookies.get('auth_token'),
+					},
 				},
-			})
+			)
 			.then((response) => {
 				console.log(response);
 				getAllOrders();
 			})
 			.catch((err) => {
-				console.log(err.message);
+				console.log(err);
 			});
-		// };
 	};
 	const handleDeleteOrder = (_id) => {
 		axios
@@ -70,22 +70,7 @@ const OrderRow = ({
 			});
 		getAllOrders();
 	};
-	const handleEditOrderState = () => {
-		setLoading(true);
-		axios
-			.put(`${nodeEnv}/order/${_id}`, orderState, {
-				headers: {
-					auth_token: Cookies.get('auth_token'),
-				},
-			})
-			.then((response) => {
-				console.log(response);
-				getAllOrders();
-			})
-			.catch((err) => {
-				console.log(err.message);
-			});
-	};
+	
 
 	return (
 		<tr>
@@ -103,15 +88,11 @@ const OrderRow = ({
 						<select
 							name="state"
 							id="state"
-							onChange={(e) => {
-								handleInputChange(e);
-								setLoading(true);
-								handleEditOrderState();
-							}}
+							onChange={handleInputChange}
 						>
-							<option value="created">{state}</option>
+							<option>{state}</option>
 							<option value="created">Created</option>
-							<option value="Processing">Processing</option>
+							<option value="processing">Processing</option>
 							<option value="shipped">Shipped</option>
 							<option value="cancelled">Cancelled</option>
 						</select>
