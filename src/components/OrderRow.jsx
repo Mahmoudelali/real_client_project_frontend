@@ -70,7 +70,6 @@ const OrderRow = ({
 			});
 		getAllOrders();
 	};
-	
 
 	return (
 		<tr>
@@ -92,6 +91,7 @@ const OrderRow = ({
 						>
 							<option>{state}</option>
 							<option value="created">Created</option>
+							<option value="pending">Pending</option>
 							<option value="processing">Processing</option>
 							<option value="shipped">Shipped</option>
 							<option value="cancelled">Cancelled</option>
