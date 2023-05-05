@@ -77,94 +77,102 @@ function App() {
 
 	return (
 		<div className="App">
-			<isLoggedIn.Provider value={[loggedIn, setLoggedIn]}>
-				<SidebarStatus.Provider
-					value={[sidebarExpanded, setSidebarExpanded]}
-				>
-					<BrowserRouter>
-						<Routes>
-							{/* home routes */}
-							<Route path="/" element={<Home />}>
-								<Route exact path="/" element={<Main />} />
-								<Route
-									path="/register"
-									element={<Register />}
-								/>
-								<Route path="/login" element={<Login />} />
-								<Route path="/post" element={<Post />} />
-								<Route path="/about" element={<AboutUs />} />
-								<Route
-									path="/categories"
-									element={<Categories />}
-								/>
-								<Route
-									path="/categories/:categoryId"
-									element={<SingleCategory />}
-								/>
-								<Route
-									path="/contact"
-									element={<ContactUs />}
-								/>
-								<Route
-									path="/instructions"
-									element={<Instruction />}
-								/>
-								<Route path="/orders" element={<Orders />} />
-								<Route
-									path="/profile"
-									element={<ProfilePage />}
-								/>
-								<Route path="/cart" element={<Cart />} />
-							</Route>
-
-							{/* Dashboard routes */}
-
-							{isAdmin && (
-								<Route
-									path="/admin/dashboard"
-									element={
-										<Dashboard
-											loggedIn={loggedIn}
-											setLoggedIn={setLoggedIn}
-										/>
-									}
-								>
+			<isLoading.Provider value={[loading, setIsLoading]}>
+				<isLoggedIn.Provider value={[loggedIn, setLoggedIn]}>
+					<SidebarStatus.Provider
+						value={[sidebarExpanded, setSidebarExpanded]}
+					>
+						<BrowserRouter>
+							<Routes>
+								{/* home routes */}
+								<Route path="/" element={<Home />}>
+									<Route exact path="/" element={<Main />} />
 									<Route
-										exact
-										path="/admin/dashboard/"
-										element={<DashHome />}
-									></Route>
+										path="/register"
+										element={<Register />}
+									/>
+									<Route path="/login" element={<Login />} />
+									<Route path="/post" element={<Post />} />
 									<Route
-										path="/admin/dashboard/settings"
-										element={<Settings />}
-									></Route>
+										path="/about"
+										element={<AboutUs />}
+									/>
 									<Route
-										path="/admin/dashboard/products"
-										element={<Products />}
-									></Route>
+										path="/categories"
+										element={<Categories />}
+									/>
 									<Route
-										path="/admin/dashboard/admins"
-										element={<Admins />}
-									></Route>
+										path="/categories/:categoryId"
+										element={<SingleCategory />}
+									/>
 									<Route
-										path="/admin/dashboard/orders"
-										element={<DashOrders />}
-									></Route>
+										path="/contact"
+										element={<ContactUs />}
+									/>
 									<Route
-										path="/admin/dashboard/users"
-										element={<Users />}
-									></Route>
+										path="/instructions"
+										element={<Instruction />}
+									/>
 									<Route
-										path="/admin/dashboard/pending"
-										element={<Pending />}
-									></Route>
+										path="/orders"
+										element={<Orders />}
+									/>
+									<Route
+										path="/profile"
+										element={<ProfilePage />}
+									/>
+									<Route path="/cart" element={<Cart />} />
 								</Route>
-							)}
-							<Route path="*" element={<VisitorUnauth />} />
-						</Routes>
-					</BrowserRouter>
-				</SidebarStatus.Provider>
-			</isLoggedIn.Provider>
+
+								{/* Dashboard routes */}
+
+								{isAdmin && (
+									<Route
+										path="/admin/dashboard"
+										element={
+											<Dashboard
+												loggedIn={loggedIn}
+												setLoggedIn={setLoggedIn}
+											/>
+										}
+									>
+										<Route
+											exact
+											path="/admin/dashboard/"
+											element={<DashHome />}
+										></Route>
+										<Route
+											path="/admin/dashboard/settings"
+											element={<Settings />}
+										></Route>
+										<Route
+											path="/admin/dashboard/products"
+											element={<Products />}
+										></Route>
+										<Route
+											path="/admin/dashboard/admins"
+											element={<Admins />}
+										></Route>
+										<Route
+											path="/admin/dashboard/orders"
+											element={<DashOrders />}
+										></Route>
+										<Route
+											path="/admin/dashboard/users"
+											element={<Users />}
+										></Route>
+										<Route
+											path="/admin/dashboard/pending"
+											element={<Pending />}
+										></Route>
+									</Route>
+								)}
+								<Route path="*" element={<VisitorUnauth />} />
+							</Routes>
+						</BrowserRouter>
+					</SidebarStatus.Provider>
+				</isLoggedIn.Provider>
+			</isLoading.Provider>
 		</div>
 	);
 }

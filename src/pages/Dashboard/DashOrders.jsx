@@ -3,7 +3,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import OrderRow from '../../components/OrderRow';
 import Loader from '../../components/Loader';
-import { isLoading } from '../../App.js';
+import { isLoading } from '../../App';
 
 const DashOrders = () => {
 	const nodeEnv = process.env.REACT_APP_URL;
