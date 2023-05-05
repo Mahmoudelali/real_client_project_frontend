@@ -10,6 +10,7 @@ import Loader from '../../components/Loader';
 import Grid from 'antd/es/card/Grid';
 import Link from 'antd/es/typography/Link';
 import Cookies from 'js-cookie';
+import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const ContactUs = () => {
 	const nodeEnv = process.env.REACT_APP_URL;
@@ -63,6 +64,7 @@ const ContactUs = () => {
 			.get(`${nodeEnv}/socialmedia/`)
 			.then((response) => {
 				setLinks(response.data.docs[0]);
+				console.log(response.data.docs[0]);
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -118,7 +120,73 @@ const ContactUs = () => {
 									{!links ? (
 										<Loader border={'5px dotted #fff'} />
 									) : (
-										<>{links.number}</>
+										<a>{links.number}</a>
+									)}
+								</td>
+							</tr>
+							<tr className="contact-tr">
+								<td className="contact-td">
+									<Grid
+										sx={{
+											display: 'inline',
+											verticalAlign: 'middle',
+										}}
+									>
+										<FaFacebook />
+									</Grid>
+								</td>
+								<td className="contact-td">
+									{' '}
+									{!links ? (
+										<Loader border={'5px dotted #fff'} />
+									) : (
+										<a href={`mailto:${links.facebook}`}>
+											{links.facebook}
+										</a>
+									)}
+								</td>
+							</tr>
+							<tr className="contact-tr">
+								<td className="contact-td">
+									<Grid
+										sx={{
+											display: 'inline',
+											verticalAlign: 'middle',
+										}}
+									>
+										<FaInstagram />
+									</Grid>
+								</td>
+								<td className="contact-td">
+									{' '}
+									{!links ? (
+										<Loader border={'5px dotted #fff'} />
+									) : (
+										<a href={`mailto:${links.instagram}`}>
+											{links.instagram}
+										</a>
+									)}
+								</td>
+							</tr>
+							<tr className="contact-tr">
+								<td className="contact-td">
+									<Grid
+										sx={{
+											display: 'inline',
+											verticalAlign: 'middle',
+										}}
+									>
+										<FaWhatsapp />
+									</Grid>
+								</td>
+								<td className="contact-td">
+									{' '}
+									{!links ? (
+										<Loader border={'5px dotted #fff'} />
+									) : (
+										<a href={links.whatsapp}>
+											{links.whatsapp}
+										</a>
 									)}
 								</td>
 							</tr>
