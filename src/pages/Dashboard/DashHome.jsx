@@ -13,7 +13,9 @@ const DashHome = () => {
 	const [products, setProducts] = useState(null);
 	const [users, setUsers] = useState(null);
 	const [orders, setOrders] = useState(null);
-
+	const [socialLinks, setSocialLinks] = useState(null);
+	// router.get("/:socialMediaId", getSocialMediaById);
+	// router.put("/:socialMediaId", updateSocialMedia);
 	const getAllAdmins = () => {
 		axios
 			.get(`${process.env.REACT_APP_URL}/user/`, {
@@ -29,7 +31,6 @@ const DashHome = () => {
 				console.log(err.message);
 			});
 	};
-
 	const getAllProducts = () => {
 		axios
 			.get(`${nodeEnv}/products/`, {
@@ -58,10 +59,33 @@ const DashHome = () => {
 				console.log(err.message);
 			});
 	};
+	const getSocialLinks = () => {
+		axios
+			.get(`${nodeEnv}/socialmedia/`)
+			.then((res) => {
+				setSocialLinks(res.data.docs[0]);
+				console.log(res.data.docs[0]);
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
+	};
+	const getAllProfits = () => {
+		axios
+			.get(`${nodeEnv}/profit/`)
+			.then((res) => {
+				console.log(res.data.docs);
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
+	};
 
 	useEffect(getAllProducts, []);
 	useEffect(getAllAdmins, []);
 	useEffect(getAllOrders, []);
+	useEffect(getSocialLinks, []);
+	useEffect(getAllProfits, []);
 
 	return (
 		<div className="dash-home-container">
@@ -95,6 +119,20 @@ const DashHome = () => {
 					</article>
 					<article className="onpage-products center">
 						<div className="center big-font">
+							{!orders ? (
+								<Loader border={'5px dotted #fff'} />
+							) : (
+								orders.filter((order) => {
+									return order.state === 'pending';
+								}).length
+							)}
+						</div>
+						<NavLink to="/admin/dashboard/orders">
+							Pending <br /> Orders
+						</NavLink>
+					</article>
+					<article className="onpage-products center">
+						<div className="center big-font">
 							{!products ? (
 								<Loader border={'5px dotted #fff'} />
 							) : (
@@ -121,6 +159,43 @@ const DashHome = () => {
 							Hidden <br /> Products
 						</NavLink>
 					</article>
+				</div>
+				<div className="edit-contact-section">
+					{socialLinks && (
+						<form
+							className="form"
+							style={{
+								padding: '.5rem',
+							}}
+						>
+							<label htmlFor="">Whatsapp</label>
+							<input
+								type="text"
+								className="input w-100"
+								placeholder={socialLinks.whatsapp}
+							/>
+							<label htmlFor="">Facebook</label>
+							<input
+								type="text"
+								className="input w-100"
+								placeholder={socialLinks.facebook}
+							/>
+							<label htmlFor="">Instagram</label>
+							<input
+								type="text"
+								className="input w-100"
+								placeholder={socialLinks.instagram}
+							/>
+							<label htmlFor="email">email </label>
+							<input
+								type="text"
+								className="input w-100"
+								placeholder={socialLinks.instagram}
+							/>
+
+							<button className="submit-btn w-100">Save</button>
+						</form>
+					)}
 				</div>
 				<div className="users-home-section">
 					<article className="flex-card">

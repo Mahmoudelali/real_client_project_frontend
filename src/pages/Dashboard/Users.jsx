@@ -61,7 +61,7 @@ const Users = () => {
 							{tableTitles.map((title) => {
 								return (
 									<th key={tableTitles.indexOf(title)}>
-										{title}
+										{title.toUpperCase()}
 									</th>
 								);
 							})}
