@@ -38,7 +38,7 @@ function ShoppingCart({ products, onProductRemove }) {
                   color={"white"}
                 />
               </button>
-              <Link className="cart-order" to="/orders">
+              <Link to="/orders">
                 <button className="cart-btn-order">Order Now</button>
               </Link>{" "}
             </div>
