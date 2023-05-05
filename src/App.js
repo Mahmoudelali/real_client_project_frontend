@@ -39,9 +39,9 @@ function App() {
     window.screen.width > 468 ? true : false
   );
 
-	const [loggedIn, setLoggedIn] = useState(false);
-	const [isAdmin, setIsAdmin] = useState(false);
-	const [loading, setIsLoading] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [loading, setIsLoading] = useState(false);
 
   const userIsLoggedIn = () => {
     axios

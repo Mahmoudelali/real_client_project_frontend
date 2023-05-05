@@ -9,9 +9,8 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: auto;
-  
 }
-.category-header{
+.category-header {
   font-size: 3rem;
   text-align: center;
   margin-top: 2rem;
@@ -47,7 +46,7 @@
     align-items: center;
     padding: 1rem;
   }
-  
+
   .category-circle {
     margin: 1rem;
     width: 250px;

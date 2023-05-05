@@ -32,7 +32,12 @@ function Footer() {
             <div className="footer-socials">
               {social.map(({ icon, link }, index) => {
                 return (
-                  <NavLink className="footer-social-link" key={index} target="_blank" to={link}>
+                  <NavLink
+                    className="footer-social-link"
+                    key={index}
+                    target="_blank"
+                    to={link}
+                  >
                     <Grid item xs={1}>
                       {icon}
                     </Grid>
@@ -61,10 +66,16 @@ function Footer() {
               </article>
               <article>
                 <a href="tel:+96171871678" className="footer-contact-link">
-                  <Grid sx={{ display: "inline", verticalAlign: "middle" ,  marginRight: "8px",}}>
+                  <Grid
+                    sx={{
+                      display: "inline",
+                      verticalAlign: "middle",
+                      marginRight: "8px",
+                    }}
+                  >
                     <LocalPhoneIcon />
                   </Grid>
-                  +961 71 627 991 
+                  +961 71 627 991
                 </a>
               </article>
             </div>

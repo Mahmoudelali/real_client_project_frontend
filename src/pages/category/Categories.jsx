@@ -4,7 +4,7 @@ import axios from "axios";
 import Loader from "../../components/Loader";
 import "./category.css";
 
-function Categories ()  {
+function Categories() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -27,16 +27,18 @@ function Categories ()  {
 
   return (
     <div>
-       <div className="category-hero-section">
+      <div className="category-hero-section">
         {/* <img src={CategoImage} alt="Category Image" /> */}
-        <h1 className="catego-content">This is a custom category page for khizana</h1>
-        </div>
+        <h1 className="catego-content">
+          This is a custom category page for khizana
+        </h1>
+      </div>
       <h1 className="catego-header">Categories</h1>
       <div className="catego-container">
         {loading ? (
-          <Loader/>
-          // <div>Loading categories...</div>
-        ) : Array.isArray(categories) && categories.length > 0 ? (
+          <Loader />
+        ) : // <div>Loading categories...</div>
+        Array.isArray(categories) && categories.length > 0 ? (
           categories.map((category) => {
             return (
               <div key={category.id} className="catego-circle">
@@ -49,6 +51,6 @@ function Categories ()  {
       </div>
     </div>
   );
-};
+}
 
 export default Categories;
