@@ -1,0 +1,130 @@
+.category-hero-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  background-image: url("../../images/pexels-caleb-oquendo-3038455.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.category-hero-section h1 {
+  font-family: "Arial Narrow";
+  font-size: 6rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #fff;
+}
+.category-hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: rgba(0, 0, 0, 0.252);
+}
+.category-hero-section img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.catego-content {
+  position: absolute;
+  left: 0;
+  text-align: left;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  margin-left: 6.8%;
+  color: var(--secondary);
+  /* text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.9); */
+  font-size: 5rem;
+  font-weight: 700;
+  margin-bottom: 3rem;
+}
+.catego-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: auto;
+}
+.catego-header {
+  /* font-size: 3rem; */
+  text-align: center;
+  margin-top: 2rem;
+}
+.catego-circle {
+  display: flex;
+  align-items: center;
+  margin-right: 55px;
+  margin-bottom: 2rem;
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  box-shadow: 0px 5px 15px 0px rgba(10, 10, 10, 0.1);
+  background-color: var(--secondary);
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  line-height: 50px;
+  font-size: 4rem;
+  font-weight: bold;
+  color: var(--primary);
+  transition: transform 0.3s ease-in-out;
+}
+.catego-circle:hover {
+  transform: scale(1.07);
+  background-color: var(--accent);
+  color: var(--primary);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+}
+.catego-description {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  max-width: 400px;
+}
+@media screen and (max-width: 1100px) {
+  .category-hero-section {
+    height: 80vh;
+  }
+  .catego-content {
+    position: static;
+    text-align: center;
+    margin-left: 0;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    font-size: 2.5rem;
+    color: var(--primary);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9);
+  }
+
+  .category-hero-section h1{
+    font-size: 2.5rem;
+  }
+  .catego-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+  }
+  .catego-circle {
+    margin: 1rem;
+    width: 250px;
+    height: 250px;
+    font-size: 2rem;
+  }
+}

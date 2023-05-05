@@ -25,7 +25,8 @@ function HomeProductSection() {
     },
   };
   return (
-    <div>
+    <div className="carousel-container">
+      <h1 className="product-header">Products</h1>
       <Carousel responsive={responsive}>
         <div className="card">
             <img className="product--image"
