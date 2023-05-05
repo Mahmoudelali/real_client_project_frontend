@@ -7,9 +7,7 @@ function Post() {
     const [err, setErr] = useState("");
     const [loading, setLoading] = useState(false);
     const [categories, setCategories] = useState([]);
-    const [subcategories, setSubcategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
-    const [selectedSubcategory, setSelectedSubcategory] = useState("");
     const [posted, setPosted] = useState(false);
 
     const image = useRef();
@@ -18,7 +16,6 @@ function Post() {
     const price = useRef();
     const condition = useRef();
     const categorySelected = useRef();
-    const subCategorySelected = useRef();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,7 +28,6 @@ function Post() {
         formData.append("price", price.current.value);
         formData.append("condition", condition.current.value);
         formData.append("categorySelected", categorySelected.current.value);
-        formData.append("subCategorySelected", subCategorySelected.current.value);
         axios
             .post(`${process.env.REACT_APP_URL}/products/create`, formData, {
                 headers: { auth_token: cookie.load("auth_token") },
@@ -64,22 +60,7 @@ function Post() {
     };
     useEffect(() => {
         fetchCategories();
-        fetchSubCategories();
-    }, [selectedCategory]);
-
-    // Fetch subcategories from the API based on the selected category and set the state
-    const fetchSubCategories = () => {
-        if (selectedCategory) {
-            axios
-                .get(`${process.env.REACT_APP_URL}/subcategory`)
-                .then((res) => {
-                    setSubcategories(res.data.response.docs);
-                })
-                .catch((err) => console.log(err));
-        } else {
-            setSubcategories([]);
-        }
-    };
+    }, []);
 
     return (
         <>
@@ -187,37 +168,6 @@ function Post() {
                             </option>
                         ))}
                     </select>
-
-                    {selectedCategory && (
-                        <>
-                            <label htmlFor="subcategory" className="post-label">
-                                Subcategory
-                            </label>
-
-                            <select
-                                required
-                                name="subcategory"
-                                ref={subCategorySelected}
-                                className="post-input post-select"
-                                id="subcategory"
-                                value={selectedSubcategory}
-                                onChange={(e) => setSelectedSubcategory(e.target.value)}
-                            >
-                                <option className="post-input" disabled value="">
-                                    Select a subcategory
-                                </option>
-                                {subcategories.map((subcategory) => (
-                                    <option
-                                        className="post-input"
-                                        key={subcategory._id}
-                                        value={subcategory._id}
-                                    >
-                                        {subcategory.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </>
-                    )}
 
                     {err !== "" && err && (
                         <div className="post-error-message" style={{ marginBottom: "1pc" }}>
