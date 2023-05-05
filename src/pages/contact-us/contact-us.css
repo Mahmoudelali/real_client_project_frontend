@@ -12,8 +12,12 @@
 	color: var(--primary);
 	border-radius: 10px;
 	flex-basis: 30%;
-	padding: 40px 60px;
+	padding: 1rem;
 	background: var(--secondary);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
 }
 .contact-contact-right {
 	padding: 40px 60px;
@@ -86,7 +90,7 @@
 }
 
 .contact-tr .contact-td {
-	padding-right: 20px;
+	padding-right: 5px;
 	padding-top: 20px;
 }
 .contact-td a {
@@ -94,7 +98,16 @@
 	color: var(--primary);
 }
 .contact-td svg {
-  vertical-align: middle;
+	vertical-align: middle;
+}
+.contact-contact-left table { 
+  margin-left: 1rem;
+}
+.contact-contact-left table tr {
+	padding: 0.5rem 0 !important;
+}
+.contact-contact-left table tr td:nth-child(2) a {
+	font-size: 18px;
 }
 
 @media screen and (max-width: 768px) {
