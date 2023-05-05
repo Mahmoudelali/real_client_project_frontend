@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import "./SingleCategory.css";
 
 function Category() {
   const { categoryId } = useParams();
@@ -9,7 +10,7 @@ function Category() {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_URL}/products/category/${categoryId}`
+        `${process.env.REACT_APP_URL}/products`
       );
       console.log(response.data);
       setCategoryData(response.data.docs);
@@ -20,15 +21,19 @@ function Category() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [categoryId]);
 
   return (
-    <div>
+    <div className="category-container">
       {categoryData &&
         categoryData.map((data) => (
-          <div key={data.id}>
-            <h1>{data.title}</h1>
-            <p>{data.description}</p>
+          <div key={data.id} className="card">
+            <img src={data.imageUrl} alt={data.title} className="card-image" />
+            <div className="card-content">
+              <h2 className="card-title">{data.title}</h2>
+              <p className="card-description">{data.description}</p>
+              <button className="card-button">Buy Now</button>
+            </div>
           </div>
         ))}
     </div>

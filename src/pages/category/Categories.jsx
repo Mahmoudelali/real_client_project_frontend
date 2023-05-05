@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import CategoImage from "../../images/pexels-caleb-oquendo-3038455.jpg";
 import Loader from "../../components/Loader";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./category.css";
 
 function Categories() {
@@ -25,10 +25,16 @@ function Categories() {
     fetchData();
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (categoryId) => {
+    // localStorage.setItem("selectedCategoryId", categoryId);
+    navigate(`/categories/${categoryId}`);
+  };
+
   return (
     <div>
       <div className="category-hero-section">
-        {/* <img src={CategoImage} alt="Category Image" /> */}
         <h1 className="catego-content">
           This is a custom category page for khizana
         </h1>
@@ -37,11 +43,14 @@ function Categories() {
       <div className="catego-container">
         {loading ? (
           <Loader />
-        ) : // <div>Loading categories...</div>
-        Array.isArray(categories) && categories.length > 0 ? (
+        ) : Array.isArray(categories) && categories.length > 0 ? (
           categories.map((category) => {
             return (
-              <div key={category.id} className="catego-circle">
+              <div
+                key={category.id}
+                className="catego-circle"
+                onClick={() => handleCategoryClick(category._id)}
+              >
                 {category.name}
                 <p className="description">{category.description}</p>
               </div>
