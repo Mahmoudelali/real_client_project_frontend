@@ -1,28 +1,27 @@
 import React, { useState, useEffect, useContext } from 'react';
-import Cookies from 'js-cookie';
 import axios from 'axios';
-
-import Loader from '../../components/Loader';
-import '../Dashboard/dashboard.css';
+import Cookies from 'js-cookie';
 import OrderRow from '../../components/OrderRow';
-import { isLoading } from '../../App';
+import Loader from '../../components/Loader';
+import { isLoading } from '../../App.js';
 
-const Pending = () => {
+const DashOrders = () => {
 	const orderTableTitles = [
-		'orderedBy',
-		'email',
-		'address',
-		'product',
-		'total',
+		'OrderedBy',
+		'Email',
+		'Address',
+		'Product',
+		'Total',
+		'State',
+		'Manage',
 		'message',
-		'_id',
-		'approve',
+		'id',
 		'delete',
 	];
-	const nodeEnv = process.env.REACT_APP_URL;
-	const [pendingOrders, setPendingOrders] = useState(null);
-	const [search, setSearch] = useState('');
 	const [loading, setLoading] = useContext(isLoading);
+	const nodeEnv = process.env.REACT_APP_URL;
+	const [orders, setOrders] = useState(null);
+	const [search, setSearch] = useState('');
 	const getAllOrders = () => {
 		axios
 			.get(`${nodeEnv}/order`, {
@@ -31,12 +30,9 @@ const Pending = () => {
 				},
 			})
 			.then((res) => {
+				setOrders(res.data.docs);
+				setLoading(false);
 				console.log(res.data.docs);
-				setPendingOrders(
-					res.data.docs.filter((doc) => {
-						return doc.state === 'pending';
-					}),
-				);
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -44,11 +40,11 @@ const Pending = () => {
 	};
 
 	useEffect(getAllOrders, []);
-	return !pendingOrders || loading ? (
+	return !orders || loading ? (
 		<Loader isComponent={true} />
 	) : (
 		<div className="orders-container">
-			<h2 className="title center">Pending Orders</h2>
+			<h2 className="title center">Orders</h2>
 			<form style={{ marginBottom: '10px' }}>
 				<input
 					placeholder="Search"
@@ -68,20 +64,27 @@ const Pending = () => {
 				<thead>
 					<tr>
 						{orderTableTitles.map((title, index) => {
-							return <th key={index}>{title}</th>;
+							return <th key={index}>{title.toUpperCase()}</th>;
 						})}
 					</tr>
 				</thead>
 				<tbody>
-					{pendingOrders &&
-						pendingOrders
+					{orders &&
+						orders
 							.filter((order) => {
-								return order.state === 'pending';
+								return order.state !== 'pending';
 							})
 							.map(
-								({ address, message, total, user_id, _id }) => (
+								({
+									address,
+									message,
+									total,
+									user_id,
+									_id,
+									state,
+								}) => (
 									<OrderRow
-										isPending={true}
+										state={state}
 										key={_id}
 										address={address}
 										message={message}
@@ -95,7 +98,11 @@ const Pending = () => {
 							)}
 					<tr>
 						<td>
-							<strong>Total </strong>: {pendingOrders.length}
+							<strong>Total </strong>:{' '}
+							{orders &&
+								orders.filter((order) => {
+									return order.state !== 'pending';
+								}).length}
 						</td>
 					</tr>
 				</tbody>
@@ -104,4 +111,4 @@ const Pending = () => {
 	);
 };
 
-export default Pending;
+export default DashOrders;

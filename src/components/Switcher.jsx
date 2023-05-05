@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import '../Styles/Switcher.css';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { isLoading } from '../App.js';
 
 const Switcher = ({
 	isSuper,
@@ -13,6 +14,7 @@ const Switcher = ({
 	getAllUsers,
 }) => {
 	const nodeEnv = process.env.REACT_APP_URL;
+	const [Loading, setLoading] = useContext(isLoading);
 
 	const handleEditVisibility = () => {
 		axios
@@ -26,9 +28,11 @@ const Switcher = ({
 				},
 			)
 			.then((res) => {
-				console.log(res);
-
-				getAllProducts();
+				if (res.status === 200) {
+					getAllProducts();
+					setLoading(false);
+					console.log(res);
+				}
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -37,11 +41,15 @@ const Switcher = ({
 
 	const handleEditAdmin = () => {
 		axios
-			.put(`${nodeEnv}/user/edit/${_id}`, {
-				headers: {
-					auth_token: `${Cookies.get('auth_token')}`,
+			.put(
+				`${nodeEnv}/user/edit/${_id}`,
+				isSuper ? { role: 'superAdmin' } : { role: 'admin' },
+				{
+					headers: {
+						auth_token: `${Cookies.get('auth_token')}`,
+					},
 				},
-			})
+			)
 			.then((res) => {
 				console.log(res);
 				res.status === 200 && setIsSuper(!isSuper);
@@ -66,7 +74,11 @@ const Switcher = ({
 					cursor: 'pointer',
 				}}
 				// {}
-				onClick={setAdmin ? handleEditAdmin : handleEditVisibility}
+				onClick={() => {
+					setLoading(true);
+					console.log(Loading);
+					setAdmin ? handleEditAdmin() : handleEditVisibility();
+				}}
 			></div>
 		</div>
 	);

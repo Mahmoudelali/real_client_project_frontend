@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import Switcher from '../components/Switcher.jsx';
+import { isLoading } from '../App.js';
 
 const Product = ({
 	setEditViewExpanded,
@@ -23,6 +24,7 @@ const Product = ({
 	getAllProducts,
 	onPage,
 }) => {
+	const [Loading, setLoading] = useContext(isLoading);
 	const nodeEnv = process.env.REACT_APP_URL;
 	const handleDeleteProduct = () => {
 		axios
@@ -64,6 +66,8 @@ const Product = ({
 			<td>{condition}</td>
 			<td>
 				<Switcher
+					isLoading={Loading}
+					setIsLoading={setLoading}
 					onPage={onPage}
 					getAllProducts={getAllProducts}
 					_id={_id}
@@ -88,7 +92,10 @@ const Product = ({
 			<td>
 				<button
 					className="btn delete-icon"
-					onClick={handleDeleteProduct}
+					onClick={() => {
+						setLoading(true);
+						handleDeleteProduct();
+					}}
 				>
 					<Grid x={1}>
 						<DeleteIcon />

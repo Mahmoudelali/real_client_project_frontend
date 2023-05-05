@@ -32,14 +32,16 @@ import Post from "./components/post/Post";
 
 export const SidebarStatus = React.createContext();
 export const isLoggedIn = React.createContext();
+export const isLoading = React.createContext();
 
 function App() {
   const [sidebarExpanded, setSidebarExpanded] = useState(
     window.screen.width > 468 ? true : false
   );
 
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
+	const [loggedIn, setLoggedIn] = useState(false);
+	const [isAdmin, setIsAdmin] = useState(false);
+	const [loading, setIsLoading] = useState(false);
 
   const userIsLoggedIn = () => {
     axios
