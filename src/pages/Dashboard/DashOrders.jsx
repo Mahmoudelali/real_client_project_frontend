@@ -6,6 +6,7 @@ import Loader from '../../components/Loader';
 import { isLoading } from '../../App.js';
 
 const DashOrders = () => {
+	const nodeEnv = process.env.REACT_APP_URL;
 	const orderTableTitles = [
 		'OrderedBy',
 		'Email',
@@ -19,9 +20,9 @@ const DashOrders = () => {
 		'delete',
 	];
 	const [loading, setLoading] = useContext(isLoading);
-	const nodeEnv = process.env.REACT_APP_URL;
 	const [orders, setOrders] = useState(null);
 	const [search, setSearch] = useState('');
+
 	const getAllOrders = () => {
 		axios
 			.get(`${nodeEnv}/order`, {
@@ -38,8 +39,8 @@ const DashOrders = () => {
 				console.log(err.message);
 			});
 	};
-
 	useEffect(getAllOrders, []);
+
 	return !orders || loading ? (
 		<Loader isComponent={true} />
 	) : (
@@ -73,6 +74,25 @@ const DashOrders = () => {
 						orders
 							.filter((order) => {
 								return order.state !== 'pending';
+							})
+							.filter((order) => {
+								return search === ''
+									? order
+									: order._id
+											.toLowerCase()
+											.includes(search) ||
+											order.state
+												.toLowerCase()
+												.includes(search) ||
+											order.total
+												.toString()
+												.includes(search) ||
+											order.user_id._id
+												.toLowerCase()
+												.includes(search) ||
+											order.user_id.username
+												.toLowerCase()
+												.includes(search);
 							})
 							.map(
 								({

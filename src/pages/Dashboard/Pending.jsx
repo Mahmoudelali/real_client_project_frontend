@@ -68,7 +68,7 @@ const Pending = () => {
 				<thead>
 					<tr>
 						{orderTableTitles.map((title, index) => {
-							return <th key={index}>{title}</th>;
+							return <th key={index}>{title.toUpperCase()}</th>;
 						})}
 					</tr>
 				</thead>

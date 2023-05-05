@@ -73,7 +73,7 @@ const Products = () => {
 						<thead>
 							<tr>
 								{productTitles.map((title, index) => {
-									return <th key={index}>{title}</th>;
+									return <th key={index}>{title.toUpperCase()}</th>;
 								})}
 							</tr>
 						</thead>
