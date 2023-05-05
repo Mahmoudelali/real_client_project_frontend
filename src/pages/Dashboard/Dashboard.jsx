@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
-import { SidebarStatus } from '../../App.js';
+import { SidebarStatus } from '../../App';
 import './dashboard.css';
 import cookie from 'react-cookies';
 import Cookies from 'js-cookie';
-
 // icons
 import { Grid } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';

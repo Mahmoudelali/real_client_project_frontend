@@ -80,6 +80,16 @@ const DashHome = () => {
 				console.log(err.message);
 			});
 	};
+	const updateSocialMediaLink = () => {
+		axios
+			.put(`${nodeEnv}/socialmedia/`)
+			.then((res) => {
+				console.log(res.data);
+			})
+			.catch((err) => {
+				console.log(err.message);
+			});
+	};
 
 	useEffect(getAllProducts, []);
 	useEffect(getAllAdmins, []);
@@ -160,43 +170,7 @@ const DashHome = () => {
 						</NavLink>
 					</article>
 				</div>
-				<div className="edit-contact-section">
-					{socialLinks && (
-						<form
-							className="form"
-							style={{
-								padding: '.5rem',
-							}}
-						>
-							<label htmlFor="">Whatsapp</label>
-							<input
-								type="text"
-								className="input w-100"
-								placeholder={socialLinks.whatsapp}
-							/>
-							<label htmlFor="">Facebook</label>
-							<input
-								type="text"
-								className="input w-100"
-								placeholder={socialLinks.facebook}
-							/>
-							<label htmlFor="">Instagram</label>
-							<input
-								type="text"
-								className="input w-100"
-								placeholder={socialLinks.instagram}
-							/>
-							<label htmlFor="email">email </label>
-							<input
-								type="text"
-								className="input w-100"
-								placeholder={socialLinks.instagram}
-							/>
 
-							<button className="submit-btn w-100">Save</button>
-						</form>
-					)}
-				</div>
 				<div className="users-home-section">
 					<article className="flex-card">
 						<span
@@ -263,6 +237,44 @@ const DashHome = () => {
 							</NavLink>
 						</p>
 					</article>
+				</div>
+				<div className="edit-contact-section">
+					<h2 className="title">Edit Contact-us section</h2>
+					{socialLinks && (
+						<form
+							className="form"
+							style={{
+								padding: '.5rem',
+							}}
+						>
+							<label htmlFor="">Whatsapp</label>
+							<input
+								type="text"
+								className="input w-100"
+								placeholder={socialLinks.whatsapp}
+							/>
+							<label htmlFor="">Facebook</label>
+							<input
+								type="text"
+								className="input w-100"
+								placeholder={socialLinks.facebook}
+							/>
+							<label htmlFor="">Instagram</label>
+							<input
+								type="text"
+								className="input w-100"
+								placeholder={socialLinks.instagram}
+							/>
+							<label htmlFor="email">email </label>
+							<input
+								type="text"
+								className="input w-100"
+								placeholder={socialLinks.instagram}
+							/>
+
+							<button className="submit-btn w-100">Save</button>
+						</form>
+					)}
 				</div>
 			</div>
 		</div>

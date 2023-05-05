@@ -17,6 +17,7 @@ const Admins = () => {
 	const [search, setSearch] = useState('');
 
 	const getAllAdmins = () => {
+		console.log(loading);
 		axios
 			.get(`${process.env.REACT_APP_URL}/user/`, {
 				headers: {

@@ -1,78 +1,63 @@
-.footer-footer {
-  background-color: var(--secondary);
-  display: flex;
-  align-items: center;
+/* :root {
+	--primary: #ffffff;
+	--secondary: #000000;
+	--accent: #fc6d26;
+} */
 
-  justify-content: center;
-  width: 100%;
-  padding: 10pc;
+.footer-container {
+	min-width: 10vh;
+	background-color: var(--secondary);
+	display: flex;
+
+	flex-direction: column;
+	align-items: center;
+}
+@media screen and (min-width: 468px) {
+	.footer-container {
+		flex-direction: row;
+		justify-content: space-around;
+		font-size: 1.2rem;
+	}
+	.social-media-links {
+		justify-content: center !important;
+	}
+	.social-media-links a {
+		margin: 0 10px;
+	}
+}
+.brand-image-container {
+	width: 300px;
+	height: 300px;
+}
+.brand-image-container img {
+	object-fit: contain;
+	max-width: 100%;
+	height: 100%;
 }
 
-.footer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
+.contact-links-container {
+	color: var(--primary);
+}
+.contact-links-container > article {
+	margin: 10px 0;
+}
+.contact-links-container > article a {
+	color: var(--primary);
+	text-decoration: none;
 }
 
-.footer-socials {
-  display: flex;
-  justify-content: space-between;
+.contact-links-container > article a {
+	margin-left: 10px !important;
 }
 
-.footer-social-link {
-  font-size: 3pc;
-  margin: 0 calc(1vw);
-  color: var(--primary);
+.social-media-links {
+	margin: 1rem 0;
+	padding: 0 1rem;
+	font-size: 1.5rem !important;
+	display: flex;
+	justify-content: space-between;
 }
 
-.footer-social-link:hover {
-  color: var(--accent);
-}
-
-.footer-contacts a {
-  text-decoration: none;
-}
-.footer-contact {
-  color: var(--primary);
-  font-size: xx-large;
-}
-
-.footer-contact-link {
-  font-size: large;
-  color: var(--primary);
-  margin-right: 1pc;
-}
-
-.footer-contact-link:hover {
-  color: var(--accent);
-}
-
-@media screen and (max-width: 1200px) {
-  .footer-row {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    width: 100%;
-    height: 10vh;
-  }
-
-  .footer-socials {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .footer-contacts {
-    display: flex;
-    flex-direction: column;
-    margin-top: 1pc;
-  }
-
-  .footer-contact-link {
-    font-size: large;
-    color: var(--primary);
-    margin-right: 0;
-    margin-top: 1pc;
-  }
+.social-media-links a {
+	color: var(--primary);
 }
