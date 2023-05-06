@@ -61,3 +61,6 @@
 .social-media-links a {
 	color: var(--primary);
 }
+.social-media-links a:hover{
+	color: var(--accent);
+}

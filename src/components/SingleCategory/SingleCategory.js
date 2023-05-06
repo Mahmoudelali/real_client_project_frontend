@@ -4,8 +4,8 @@ import axios from "axios";
 import Loader from "../Loader";
 import "./SingleCategory.css";
 
-function Card({ title, price, description, imageUrl }) {
-  console.log(title, price, description, imageUrl);
+function Card({ title, price, description, image }) {
+  console.log(title, price, description, image);
   const [productsInCart, setProducts] = useState(
     JSON.parse(localStorage.getItem("shopping-cart")) || []
   );
@@ -23,7 +23,7 @@ function Card({ title, price, description, imageUrl }) {
 
   return (
     <div className="cards">
-      <img src={imageUrl} alt={title} className="cards-image" />
+      <img src={image} alt={title} className="cards-image" />
       <div className="cards-content">
         <h2 className="cards-title">{title}</h2>
         <p className="cards-price">{price}$</p>
@@ -31,7 +31,7 @@ function Card({ title, price, description, imageUrl }) {
         <button
           className="cards-button"
           onClick={() =>
-            addProductToCart({ title, price, description, imageUrl })
+            addProductToCart({ title, price, description, image })
           }
         >
           Add to Cart
@@ -76,7 +76,7 @@ function Category() {
             price={data.price}
             $
             description={data.description}
-            imageUrl={data.imageUrl}
+            image={data.image}
           />
         ))
       )}

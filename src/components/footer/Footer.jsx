@@ -10,6 +10,7 @@ import { Grid } from '@mui/material';
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail';
+import { hover } from '@testing-library/user-event/dist/hover';
 
 function Footer() {
 	const nodeEnv = process.env.REACT_APP_URL;
@@ -33,7 +34,7 @@ function Footer() {
 			</div>
 			<div className="contact-links-container">
 				<article>
-					<Grid sx={{ display: 'inline', verticalAlign: 'middle' }}>
+					<Grid sx={{ display: 'inline', verticalAlign: 'middle'}}>
 						<AlternateEmailIcon />
 					</Grid>
 
