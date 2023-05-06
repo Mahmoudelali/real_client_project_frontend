@@ -1,5 +1,4 @@
-import React from 'react';
-import { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import emailjs from '@emailjs/browser';
 import axios from 'axios';
 import { FaEnvelope, FaPhone } from 'react-icons/fa';
@@ -8,14 +7,18 @@ import './contact-us.css';
 //icon
 import Loader from '../../components/Loader';
 import Grid from 'antd/es/card/Grid';
-import Link from 'antd/es/typography/Link';
+
 import Cookies from 'js-cookie';
+import { isLoggedIn } from '../../App.js';
 import { FaFacebook, FaInstagram, FaWhatsapp } from 'react-icons/fa';
 
 const ContactUs = () => {
+	const [loggedIn, setLoggedIn] = useContext(isLoggedIn);
 	const nodeEnv = process.env.REACT_APP_URL;
 	const [links, setLinks] = useState(null);
-	const userData = JSON.parse(Cookies.get('user'));
+	const userData = loggedIn
+		? JSON.parse(Cookies.get('user'))
+		: { username: 'mahmoud ' };
 	const [message, setMessage] = useState({});
 	const form = useRef();
 

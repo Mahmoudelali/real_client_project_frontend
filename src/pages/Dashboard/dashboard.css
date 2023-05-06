@@ -8,6 +8,7 @@
 	color: var(--accent) !important;
 }
 :root {
+	--title: rgb(86, 86, 86);
 	--primary: #ffffff;
 	--secondary: #000000;
 	--accent: #fc6d26;
@@ -161,41 +162,52 @@ main {
 
 /* Dashboard Home */
 /* Dashboard Home */
+.edit-contact-section {
+	padding: 1rem 0;
+}
+.links-form {
+	box-shadow: 6px 5px 33px -6px rgb(170, 169, 169);
+	/* border: 1px solid gray !important; */
+	background-color: var(--primary);
+	border-radius: 10px;
+	padding: 0rem 0rem 1rem 0rem !important;
+}
+.links-form .title-container {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	padding: 20px 0;
+	background-color: var(--accent);
+	color: var(--primary);
+}
 
+.links-form .labels-container {
+	padding: 1rem 10px 0 10px;
+	color: rgb(86, 86, 86) !important;
+}
 .dash-home-container {
-	padding: 3rem 0.2rem 0.1rem 0.1rem;
+	padding: 0.5rem 1rem 0.2rem 0.1rem;
 }
 .home-grid-container {
 	display: grid;
 	grid-template-columns: repeat(1, 1fr);
+	gap: 1rem;
 }
-@media screen and (min-width: 768px) {
-	.home-grid-container {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
+
 .big-font {
-	font-family: 'Arial Narrow';
-	font-size: 4rem;
+	font-family: 'Arial', sans-serif;
+	font-size: 3.5rem;
 	text-align: center;
 	margin-bottom: 1rem;
 	font-weight: 900;
 }
 
 .products-home-section {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 0.2rem;
-}
-.products-home-section,
-.users-home-section {
-	padding: 1rem 0.5rem;
-	margin: 1rem 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
 }
 
-.users-home-section a {
-	color: var(--accent);
-}
 .products-home-section a {
 	text-decoration: underline;
 	color: var(--primary);
@@ -203,23 +215,64 @@ main {
 	text-align: center !important;
 }
 
-.products-home-section > article,
-.users-home-section > article {
-	margin-top: 1rem;
+.products-home-section > article {
+	flex-basis: 45%;
 	padding: 1rem;
 	border-radius: 10px;
 }
+
 .products-home-section > article {
 	background-color: var(--accent);
 	color: var(--primary);
 }
+.messages-display-contianer {
+	border-radius: 10px;
+	padding: 1rem;
+	display: grid;
+	grid-template-columns: repeat(1, 1fr);
+	gap: 1rem;
+}
+.messages-title-container {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
 
-.users-home-section > article {
-	color: var(--accent) !important;
+	margin-top: 1rem;
+	background-color: var(--accent);
 	color: var(--primary);
-	border: 2px solid var(--accent);
+	padding: 1rem;
+}
+.user-message {
+	position: relative;
+	min-height: 120px;
+	border: 1px solid #eee;
+	border-radius: 10px;
 }
 
+.message-header {
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	/* background-color: var(--secondary); */
+	background-color: rgb(238, 238, 238);
+	color: gray !important;
+	padding: 8px;
+	font-size: 0.9rem;
+}
+.message-header p:nth-child(1) {
+	letter-spacing: 1px;
+	text-transform: capitalize;
+}
+.message-header .email a {
+	color: var(--accent);
+}
+.message-content {
+	padding: 10px;
+	color: var(--title);
+}
 /* table */
 /* table */
 .orders-container table,
@@ -249,7 +302,7 @@ main {
 .orders-container td,
 .users-table-container td,
 .products-container td {
-	color: gray !important;
+	color: gray;
 	padding: 15px 20px;
 	text-align: center !important;
 }
@@ -344,12 +397,45 @@ main {
 	letter-spacing: 1px;
 }
 .submit-btn {
-	background-color: var(--secondary) !important;
-	padding: 0.5rem 1rem !important;
+	font-family: 'Arial Narrow';
+	background-color: var(--accent) !important;
+	padding: 0.6rem 1rem !important;
 	display: block !important;
 	margin: 15px auto !important;
 	border-radius: 10px !important;
 	color: var(--primary) !important;
 	font-weight: 500 !important;
 	letter-spacing: 1.5px !important;
+	transition: 0.2s;
+	border: 0 !important;
+	text-transform: uppercase;
+}
+.submit-btn:hover {
+	color: var(--secondary) !important;
+	font-weight: 900 !important;
+	letter-spacing: 3px !important;
+}
+
+@media screen and (min-width: 768px) {
+	.home-grid-container {
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.products-home-section {
+		justify-content: flex-start;
+		grid-column: 1/5;
+	}
+	.products-home-section > article {
+		flex-wrap: unset !important;
+		flex-basis: 12.5%;
+	}
+	.messages-grid-container {
+		grid-column: 2/-1;
+
+		width: 95%;
+	}
+	.messages-display-contianer {
+		grid-template-columns: repeat(2, 1fr);
+		max-height: 500px;
+		overflow-y: scroll;
+	}
 }
