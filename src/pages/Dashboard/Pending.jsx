@@ -49,23 +49,29 @@ const Pending = () => {
 	) : (
 		<div className="orders-container">
 			<h2 className="title center">Pending Orders</h2>
-			<form style={{ marginBottom: '10px' }}>
-				<input
-					placeholder="Search"
-					type="text"
-					className="input"
-					style={{
-						width: '20%',
-						display: 'block',
-						margin: '0 auto',
-					}}
-					onChange={(e) => {
-						setSearch(e.target.value);
-					}}
-				/>
-			</form>
+
 			<table>
 				<thead>
+					<tr>
+						<td style={{ padding: 0 }}>
+							<form
+								style={{ marginBottom: '10px' }}
+								className="w-100"
+							>
+								<input
+									placeholder="Search"
+									type="text"
+									className="input"
+									style={{
+										display: 'block',
+									}}
+									onChange={(e) => {
+										setSearch(e.target.value);
+									}}
+								/>
+							</form>
+						</td>
+					</tr>
 					<tr>
 						{orderTableTitles.map((title, index) => {
 							return <th key={index}>{title.toUpperCase()}</th>;

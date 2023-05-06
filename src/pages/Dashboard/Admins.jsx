@@ -52,23 +52,26 @@ const Admins = () => {
 		<div className="users-container">
 			<div className="users-table-container w-100">
 				<h2 className="title center">Admins Table</h2>
-				<form style={{ marginBottom: '10px' }}>
-					<input
-						placeholder="Search"
-						type="text"
-						className="input"
-						style={{
-							width: '20%',
-							display: 'block',
-							margin: '0 auto',
-						}}
-						onChange={(e) => {
-							setSearch(e.target.value);
-						}}
-					/>
-				</form>
+
 				<table style={{ margin: '0 auto' }}>
 					<thead>
+						<tr>
+							<td colSpan={6} style={{ padding: 0 }}>
+								<form style={{ marginBottom: '10px' }}>
+									<input
+										placeholder="Search"
+										type="text"
+										className="input"
+										style={{
+											display: 'block',
+										}}
+										onChange={(e) => {
+											setSearch(e.target.value);
+										}}
+									/>
+								</form>
+							</td>
+						</tr>
 						<tr>
 							{tableTitles.map((title) => {
 								return (
@@ -137,7 +140,7 @@ const Admins = () => {
 								)}
 						<tr>
 							{userData.role == 'superAdmin' && (
-								<td>
+								<td style={{ color: 'red' }}>
 									<button
 										className="btn "
 										onClick={() => {
@@ -156,7 +159,9 @@ const Admins = () => {
 								</td>
 							)}
 							{userData.role == 'superAdmin' && (
-								<td style={{ display: 'flex' }}>
+								<td
+									style={{ display: 'flex', color: 'orange' }}
+								>
 									<button
 										className="btn accent-color "
 										onClick={() => {

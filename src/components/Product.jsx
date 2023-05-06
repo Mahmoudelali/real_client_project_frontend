@@ -80,8 +80,9 @@ const Product = ({
 			</td>
 
 			<td>
-				<button className="btn edit-icon" style={{ background: 0 }}>
+				<button className="btn" style={{ background: 0 }}>
 					<NavLink
+						style={{ color: 'gray' }}
 						to={`http://localhost:5173/admin/dashboard/products/${_id}`}
 					>
 						<Grid item xs={1}>
@@ -90,7 +91,7 @@ const Product = ({
 					</NavLink>
 				</button>
 			</td>
-			<td>
+			<td style={{ color: '#dc3545' }}>
 				<button
 					className="btn delete-icon"
 					onClick={() => {
