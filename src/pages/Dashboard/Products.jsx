@@ -49,7 +49,7 @@ const Products = () => {
 	return (
 		// <windowExpand.Provider value={[editViewExpanded, setEditViewExpanded]}>
 		<div className="products-container">
-			{!products || Loading ? (
+			{!products ? (
 				<Loader isComponent={true} />
 			) : (
 				<div>
@@ -73,7 +73,11 @@ const Products = () => {
 						<thead>
 							<tr>
 								{productTitles.map((title, index) => {
-									return <th key={index}>{title.toUpperCase()}</th>;
+									return (
+										<th key={index}>
+											{title.toUpperCase()}
+										</th>
+									);
 								})}
 							</tr>
 						</thead>

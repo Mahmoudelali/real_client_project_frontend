@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import axios from 'axios';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+
 import { Grid } from '@mui/material';
 import Cookies from 'js-cookie';
 import Switcher from './Switcher';
 import { isLoading } from '../App.js';
+import Swal from 'sweetalert2';
 var urlEnv = process.env.REACT_APP_URL;
 const User = ({
 	phone,
@@ -76,8 +77,24 @@ const User = ({
 				<button
 					className="delete-user delete-icon btn"
 					onClick={() => {
-						setLoading(true);
-						handleDeleteUser();
+						Swal.fire({
+							title: 'Are you sure?',
+							text: "You won't be able to revert this!",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'delete !',
+						}).then((result) => {
+							if (result.isConfirmed) {
+								handleDeleteUser();
+								Swal.fire(
+									'Deleted!',
+									'Your file has been deleted.',
+									'success',
+								);
+							}
+						});
 					}}
 					// style={{ all: 'unset' }}
 				>

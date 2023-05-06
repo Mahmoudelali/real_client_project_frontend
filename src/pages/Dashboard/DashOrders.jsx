@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import OrderRow from '../../components/OrderRow';
 import Loader from '../../components/Loader';
 import { isLoading } from '../../App';
+import Swal from 'sweetalert2';
 
 const DashOrders = () => {
 	const nodeEnv = process.env.REACT_APP_URL;

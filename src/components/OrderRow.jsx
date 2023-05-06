@@ -6,6 +6,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import { isLoading } from '../App.js';
 import Loader from './Loader.jsx';
+import Swal from 'sweetalert2';
 const OrderRow = ({
 	getAllOrders,
 	product,
@@ -78,7 +79,7 @@ const OrderRow = ({
 		getAllOrders();
 	};
 
-	return(
+	return (
 		<tr>
 			<td>{username}</td>
 			<td>
@@ -86,7 +87,10 @@ const OrderRow = ({
 			</td>
 			<td>{address}</td>
 			<td>{product}</td>
-			<td>{total}</td>
+			<td>
+				<i>{total}</i>
+				<i>$</i>
+			</td>
 			{state && <td>{state}</td>}
 			{state && (
 				<td>
@@ -109,7 +113,7 @@ const OrderRow = ({
 			<td>{message}</td>
 			<td>{_id}</td>
 			{isPending && (
-				<td>
+				<td style={{ color: '#5cb85c' }}>
 					<button
 						className="btn success-icon"
 						onClick={() => {
@@ -124,12 +128,24 @@ const OrderRow = ({
 				</td>
 			)}
 
-			<td>
+			<td className="delete-icon">
 				<button
-					className=" btn delete-icon"
+					className=" btn "
 					onClick={() => {
-						setLoading(true);
-						handleDeleteOrder(_id);
+						Swal.fire({
+							title: 'Are you sure?',
+							text: "You won't be able to revert this!",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'Yes, delete it!',
+						}).then((result) => {
+							if (result.isConfirmed) {
+								handleDeleteOrder(_id);
+								Swal.fire('Deleted!', 'success');
+							}
+						});
 					}}
 				>
 					<Grid x={1}>

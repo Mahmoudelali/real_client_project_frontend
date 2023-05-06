@@ -4,8 +4,10 @@ import Cookies from 'js-cookie';
 import Loader from '../../components/Loader';
 import { NavLink } from 'react-router-dom';
 import { isLoading } from '../../App.js';
+import Swal from 'sweetalert2';
 // icons
 import { Grid } from '@mui/material';
+
 import PersonIcon from '@mui/icons-material/Person';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import PendingIcon from '@mui/icons-material/Pending';
@@ -13,7 +15,15 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import FunctionsIcon from '@mui/icons-material/Functions';
-import DeleteIcon from '@mui/icons-material/Delete';
+
+import LinkIcon from '@mui/icons-material/Link';
+import Message from '../../components/Message';
+//social media icons
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import TagIcon from '@mui/icons-material/Tag';
 
 const DashHome = () => {
 	const nodeEnv = process.env.REACT_APP_URL;
@@ -24,6 +34,7 @@ const DashHome = () => {
 	const [socialInput, setSocialInput] = useState({});
 	const [messages, setMessages] = useState(null);
 	const [loading, setLoading] = useContext(isLoading);
+
 	const handleInputChange = (e) => {
 		setSocialInput({ ...socialInput, [e.target.name]: e.target.value });
 		console.log(socialInput);
@@ -102,11 +113,18 @@ const DashHome = () => {
 				console.log(err.message);
 			});
 	};
-	const updateSocialMediaLink = (e) => {
-		e.preventDefault();
+	const updateSocialMediaLink = () => {
 		axios
 			.put(`${nodeEnv}/socialmedia`, socialInput)
 			.then((res) => {
+				res.status === 200 &&
+					Swal.fire({
+						position: 'top-end',
+						icon: 'success',
+						title: 'Your work has been saved',
+						showConfirmButton: false,
+						timer: 1500,
+					});
 				console.log(res.data);
 			})
 			.catch((err) => {
@@ -134,6 +152,50 @@ const DashHome = () => {
 	useEffect(getSocialLinks, []);
 	useEffect(getAllProfits, []);
 
+	const dashboard_cards = [
+		{
+			icon: <FunctionsIcon />,
+			link_name: 'Total <br /> Products',
+			path: '/admin/dashboard/products',
+			value: products ? products.length : null,
+		},
+		{
+			icon: <VerifiedIcon />,
+			link_name: 'Active <br /> Orders',
+			path: '/admin/dashboard/orders',
+			value: orders ? orders.length : null,
+		},
+		{
+			icon: <FunctionsIcon />,
+			link_name: 'Pending <br /> Orders',
+			path: '/admin/dashboard/orders',
+			// value: orders ? orders.length : null,
+		},
+		{
+			icon: <FunctionsIcon />,
+			link_name: 'Total <br /> Products',
+			path: '/admin/dashboard/products',
+			// value: products.length,
+		},
+		{
+			icon: <FunctionsIcon />,
+			link_name: 'Total <br /> Products',
+			path: '/admin/dashboard/products',
+			// value: products.length,
+		},
+		{
+			icon: <FunctionsIcon />,
+			link_name: 'Total <br /> Products',
+			path: '/admin/dashboard/products',
+			// value: products.length,
+		},
+		{
+			icon: <FunctionsIcon />,
+			link_name: 'Total <br /> Products',
+			path: '/admin/dashboard/products',
+			// value: products.length,
+		},
+	];
 	return (
 		<div className="dash-home-container">
 			<div className="home-grid-container">
@@ -289,10 +351,27 @@ const DashHome = () => {
 						}}
 					>
 						<div className="title-container">
-							<h2 className="center">Edit Contact-us section</h2>
+							<h2 className="center">
+								<LinkIcon
+									style={{
+										verticalAlign: 'middle',
+										marginRight: '5px',
+									}}
+								/>
+								Edit LINKS
+							</h2>
 						</div>
 						<div className="labels-container">
-							<label htmlFor="">Whatsapp</label>
+							<label style={{ margin: '5px 0' }} htmlFor="">
+								<WhatsAppIcon
+									style={{
+										fontSize: '1.1rem',
+										margin: ' 0 5px 2px 0',
+										verticalAlign: 'middle',
+									}}
+								/>
+								Whatsapp
+							</label>
 							<input
 								name="whatsapp"
 								onChange={handleInputChange}
@@ -302,7 +381,16 @@ const DashHome = () => {
 									socialLinks ? socialLinks.whatsapp : ''
 								}
 							/>
-							<label htmlFor="">Facebook</label>
+							<label style={{ margin: '5px 0' }} htmlFor="">
+								<FacebookIcon
+									style={{
+										fontSize: '1.1rem',
+										margin: ' 0 5px 2px 0',
+										verticalAlign: 'middle',
+									}}
+								/>
+								Facebook
+							</label>
 							<input
 								name="facebook"
 								onChange={handleInputChange}
@@ -312,7 +400,16 @@ const DashHome = () => {
 									socialLinks ? socialLinks.facebook : ''
 								}
 							/>
-							<label htmlFor="">Instagram</label>
+							<label style={{ margin: '5px 0' }} htmlFor="">
+								<InstagramIcon
+									style={{
+										fontSize: '1.1rem',
+										margin: ' 0 5px 2px 0',
+										verticalAlign: 'middle',
+									}}
+								/>
+								Instagram
+							</label>
 							<input
 								name="instagram"
 								onChange={handleInputChange}
@@ -322,7 +419,16 @@ const DashHome = () => {
 									socialLinks ? socialLinks.instagram : ''
 								}
 							/>
-							<label htmlFor="email">email </label>
+							<label style={{ margin: '5px 0' }} htmlFor="email">
+								<MailOutlineIcon
+									style={{
+										fontSize: '1.1rem',
+										margin: ' 0 5px 2px 0',
+										verticalAlign: 'middle',
+									}}
+								/>
+								email{' '}
+							</label>
 							<input
 								name="email"
 								onChange={handleInputChange}
@@ -332,7 +438,19 @@ const DashHome = () => {
 									socialLinks ? socialLinks.instagram : ''
 								}
 							/>
-							<label htmlFor="number">number </label>
+							<label
+								style={{ marginTop: '5px' }}
+								htmlFor="number"
+							>
+								<TagIcon
+									style={{
+										fontSize: '1.1rem',
+										margin: ' 0 5px 2px 0',
+										verticalAlign: 'middle',
+									}}
+								/>
+								number{' '}
+							</label>
 							<input
 								name="number"
 								onChange={handleInputChange}
@@ -345,7 +463,10 @@ const DashHome = () => {
 
 							<button
 								className="submit-btn w-100"
-								onClick={updateSocialMediaLink}
+								onClick={(e) => {
+									e.preventDefault();
+									updateSocialMediaLink();
+								}}
 							>
 								Save
 							</button>
@@ -354,7 +475,9 @@ const DashHome = () => {
 				</div>
 				<div className="messages-grid-container">
 					<div className="messages-title-container">
-						<h2 className="center">from users</h2>
+						<h2 className="center">
+							MESSAGES FROM USERS ({messages && messages.length})
+						</h2>
 					</div>
 
 					<div className="messages-display-contianer">
@@ -370,61 +493,17 @@ const DashHome = () => {
 									_id,
 								}) => {
 									return (
-										<article
+										<Message
 											key={_id}
-											className="user-message"
-										>
-											<div className="message-header">
-												<div>
-													<p>
-														<span>
-															<strong>
-																{user_Fname}
-															</strong>
-														</span>{' '}
-														{'  '}
-														<span>
-															<strong>
-																{user_Lname}
-															</strong>
-														</span>
-													</p>
-
-													<p className="email">
-														{' '}
-														<strong>
-															<a
-																href={`mailto:${user_email}`}
-															>
-																<i>
-																	{' '}
-																	{user_email}
-																</i>
-															</a>
-														</strong>
-													</p>
-												</div>
-												<div
-													onClick={() => {
-														handleDeleteMessage(
-															_id,
-														);
-													}}
-													className="message-delete-icon "
-													style={{
-														color: 'orangered',
-													}}
-												>
-													<Grid x={1}>
-														<DeleteIcon />
-													</Grid>
-												</div>
-											</div>
-
-											<p className="message-content">
-												{message}
-											</p>
-										</article>
+											user_Fname={user_Fname}
+											user_Lname={user_Lname}
+											user_email={user_email}
+											handleDeleteMessage={
+												handleDeleteMessage
+											}
+											_id={_id}
+											message={message}
+										/>
 									);
 								},
 							)
