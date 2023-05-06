@@ -204,7 +204,8 @@ main {
 .products-home-section {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 1rem;
+	gap: 0.5rem;
+	padding: 0;
 	justify-content: center;
 }
 
@@ -422,6 +423,7 @@ main {
 	}
 	.products-home-section {
 		justify-content: flex-start;
+		gap: 1rem;
 		grid-column: 1/5;
 	}
 	.products-home-section > article {
