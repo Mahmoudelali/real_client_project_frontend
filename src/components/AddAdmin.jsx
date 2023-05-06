@@ -115,7 +115,7 @@ const AddAdmin = ({
 					/>
 				</label>
 
-				<button onClick={handleAddAdmin} className="btn submit-btn">
+				<button onClick={handleAddAdmin} className="submit-btn">
 					Add New Admin{' '}
 				</button>
 			</form>
