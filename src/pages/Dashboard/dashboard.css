@@ -185,7 +185,7 @@ main {
 	color: rgb(86, 86, 86) !important;
 }
 .dash-home-container {
-	padding: 3rem 0.2rem 0.1rem 0.1rem;
+	padding: 0.5rem 1rem 0.2rem 0.1rem;
 }
 .home-grid-container {
 	display: grid;
@@ -302,7 +302,7 @@ main {
 .orders-container td,
 .users-table-container td,
 .products-container td {
-	color: gray !important;
+	color: gray;
 	padding: 15px 20px;
 	text-align: center !important;
 }
@@ -429,12 +429,13 @@ main {
 		flex-basis: 12.5%;
 	}
 	.messages-grid-container {
-		overflow-y: scroll !important;
 		grid-column: 2/-1;
-		height: 570px;
+
 		width: 95%;
 	}
 	.messages-display-contianer {
 		grid-template-columns: repeat(2, 1fr);
+		max-height: 500px;
+		overflow-y: scroll;
 	}
 }

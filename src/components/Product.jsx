@@ -7,6 +7,7 @@ import axios from 'axios';
 import Cookies from 'js-cookie';
 import Switcher from '../components/Switcher.jsx';
 import { isLoading } from '../App.js';
+import Swal from 'sweetalert2';
 
 const Product = ({
 	setEditViewExpanded,
@@ -94,7 +95,24 @@ const Product = ({
 					className="btn delete-icon"
 					onClick={() => {
 						setLoading(true);
-						handleDeleteProduct();
+						Swal.fire({
+							title: 'Are you sure?',
+							text: "You won't be able to revert this!",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: 'delete !',
+						}).then((result) => {
+							if (result.isConfirmed) {
+								handleDeleteProduct();
+								Swal.fire(
+									'Deleted!',
+									'Your file has been deleted.',
+									'success',
+								);
+							}
+						});
 					}}
 				>
 					<Grid x={1}>
