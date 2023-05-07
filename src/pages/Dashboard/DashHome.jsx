@@ -435,7 +435,7 @@ const DashHome = () => {
 								type="text"
 								className="input w-100"
 								placeholder={
-									socialLinks ? socialLinks.instagram : ''
+									socialLinks ? socialLinks.email : ''
 								}
 							/>
 							<label
