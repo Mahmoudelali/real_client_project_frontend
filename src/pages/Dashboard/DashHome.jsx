@@ -480,9 +480,9 @@ const DashHome = () => {
 						</h2>
 					</div>
 
-					<div className="messages-display-contianer">
+					<div className={messages && 'messages-display-contianer'}>
 						{!messages || loading ? (
-							<Loader />
+							<Loader padding={'3rem'} />
 						) : (
 							messages.map(
 								({

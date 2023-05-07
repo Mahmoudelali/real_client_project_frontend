@@ -1,11 +1,14 @@
 import React from 'react';
 import '../Styles/Loader.css';
 
-const Loader = ({ border, isComponent }) => {
+const Loader = ({ border, isComponent, padding }) => {
 	return (
 		<div
 			className="loader-container"
-			style={{ height: isComponent && '100vh' }}
+			style={{
+				height: isComponent && '100vh',
+				padding: padding && padding,
+			}}
 		>
 			<span
 				className="loader"

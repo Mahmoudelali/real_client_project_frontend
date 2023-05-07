@@ -97,14 +97,15 @@ const ContactUs = () => {
 									</Grid>
 								</td>
 								<td className="contact-td">
-									{' '}
-									{!links ? (
-										<Loader border={'5px dotted #fff'} />
-									) : (
-										<a href={`mailto:${links.email}`}>
-											{links.email}
-										</a>
-									)}
+									<a
+										href={`mailto:${
+											links
+												? links.email
+												: 'louay@khizana.com'
+										}`}
+									>
+										louay@khizana.com
+									</a>
 								</td>
 							</tr>
 							<tr className="contact-tr">
@@ -119,12 +120,7 @@ const ContactUs = () => {
 									</Grid>
 								</td>
 								<td className="contact-td">
-									{' '}
-									{!links ? (
-										<Loader border={'5px dotted #fff'} />
-									) : (
-										<a>{links.number}</a>
-									)}
+									<a>{links ? links.number : '03 000 000'}</a>
 								</td>
 							</tr>
 							<tr className="contact-tr">
@@ -139,14 +135,16 @@ const ContactUs = () => {
 									</Grid>
 								</td>
 								<td className="contact-td">
-									{' '}
-									{!links ? (
-										<Loader border={'5px dotted #fff'} />
-									) : (
-										<a href={`mailto:${links.facebook}`}>
-											{links.facebook}
-										</a>
-									)}
+									<a
+										href={`${
+											links
+												? links.facebook
+												: 'facebook.com/khizanapage'
+										}`}
+										target="_blank"
+									>
+										Visit Khizana on Facebook
+									</a>
 								</td>
 							</tr>
 							<tr className="contact-tr">
@@ -161,14 +159,15 @@ const ContactUs = () => {
 									</Grid>
 								</td>
 								<td className="contact-td">
-									{' '}
-									{!links ? (
-										<Loader border={'5px dotted #fff'} />
-									) : (
-										<a href={`mailto:${links.instagram}`}>
-											{links.instagram}
-										</a>
-									)}
+									<a
+										href={`${
+											links
+												? links.instagram
+												: 'instagram.com'
+										}`}
+									>
+										Visit Khizana on instagram
+									</a>
 								</td>
 							</tr>
 							<tr className="contact-tr">
@@ -183,14 +182,15 @@ const ContactUs = () => {
 									</Grid>
 								</td>
 								<td className="contact-td">
-									{' '}
-									{!links ? (
-										<Loader border={'5px dotted #fff'} />
-									) : (
-										<a href={links.whatsapp}>
-											{links.whatsapp}
-										</a>
-									)}
+									<a
+										href={
+											links
+												? links.whatsapp
+												: 'whatsapp.com'
+										}
+									>
+										Leave us a message on Whatsapp
+									</a>
 								</td>
 							</tr>
 						</table>

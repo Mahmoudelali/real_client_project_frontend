@@ -34,33 +34,30 @@ function Footer() {
 			</div>
 			<div className="contact-links-container">
 				<article>
-					<Grid sx={{ display: 'inline', verticalAlign: 'middle'}}>
+					<Grid sx={{ display: 'inline', verticalAlign: 'middle' }}>
 						<AlternateEmailIcon />
 					</Grid>
-
-					{!links ? (
-						<Loader border={'5px dotted #fff'} />
-					) : (
-						<a href={`mailto:${links.email}`}>{links.email}</a>
-					)}
+					<a
+						href={`mailto:${
+							links ? links.email : 'louay@khizana.com'
+						}`}
+					>
+						louay@khizana.com
+					</a>
 				</article>
 
 				<article>
 					<Grid sx={{ display: 'inline', verticalAlign: 'middle' }}>
 						<LocalPhoneIcon />
 					</Grid>
-					<a>
-						{!links ? (
-							<Loader border={'5px dotted #fff'} />
-						) : (
-							links.number
-						)}
-					</a>
+					<a>{!links ? '03333333' : links.number}</a>
 				</article>
 				<div className="social-media-links">
 					<article>
 						{!links ? (
-							<Loader border={'5px dotted #fff'} />
+							<a>
+								<FaInstagram />
+							</a>
 						) : (
 							<NavLink to={links.instagram}>
 								<FaInstagram />
@@ -69,7 +66,9 @@ function Footer() {
 					</article>
 					<article>
 						{!links ? (
-							<Loader border={'5px dotted #fff'} />
+							<a>
+								<FaFacebook />
+							</a>
 						) : (
 							<NavLink to={links.facebook}>
 								<FaFacebook />
@@ -78,7 +77,9 @@ function Footer() {
 					</article>
 					<article>
 						{!links ? (
-							<Loader border={'5px dotted #fff'} />
+							<a>
+								<FaWhatsapp />
+							</a>
 						) : (
 							<NavLink to={links.whatsapp}>
 								<FaWhatsapp />

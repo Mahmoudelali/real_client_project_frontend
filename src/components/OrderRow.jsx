@@ -1,12 +1,26 @@
 import React, { useContext, useState } from 'react';
-import { Grid } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { isLoading } from '../App.js';
-import Loader from './Loader.jsx';
 import Swal from 'sweetalert2';
+
+import { Grid } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
+
+const Toast = Swal.mixin({
+	toast: true,
+	position: 'top-end',
+	showConfirmButton: false,
+	timer: 3000,
+	timerProgressBar: true,
+	didOpen: (toast) => {
+		toast.addEventListener('mouseenter', Swal.stopTimer);
+		toast.addEventListener('mouseleave', Swal.resumeTimer);
+	},
+});
+
 const OrderRow = ({
 	getAllOrders,
 	product,
@@ -71,6 +85,10 @@ const OrderRow = ({
 			.then((response) => {
 				console.log(response);
 				setLoading(false);
+				Toast.fire({
+					icon: 'success',
+					title: 'Order approved',
+				});
 				getAllOrders();
 			})
 			.catch((error) => {
@@ -113,6 +131,56 @@ const OrderRow = ({
 			<td>{message}</td>
 			<td>{_id}</td>
 			{isPending && (
+				<td style={{ color: '#007bff' }}>
+					<button
+						className="btn"
+						onClick={() => {
+							Swal.fire({
+								input: 'textarea',
+								inputLabel: 'Review Order',
+								inputPlaceholder: 'Type your message here...',
+								inputAttributes: {
+									'aria-label': 'Type your message here',
+									name: 'review',
+								},
+								showCancelButton: true,
+							}).then((res) => {
+								if (res.isConfirmed) {
+									axios
+										.put(
+											`${nodeEnv}/order/${_id}`,
+											{
+												review: res.value,
+											},
+											{
+												headers: {
+													auth_token:
+														Cookies.get(
+															'auth_token',
+														),
+												},
+											},
+										)
+										.then((res) => {
+											res.status === 200 &&
+												Toast.fire({
+													icon: 'success',
+													title: 'Review sent successfully',
+												});
+										})
+										.catch((err) => {
+											console.log(err.message);
+										});
+									console.log(res.value);
+								}
+							});
+						}}
+					>
+						<EmojiObjectsIcon />
+					</button>
+				</td>
+			)}
+			{isPending && (
 				<td style={{ color: '#5cb85c' }}>
 					<button
 						className="btn success-icon"
@@ -137,9 +205,9 @@ const OrderRow = ({
 							text: "You won't be able to revert this!",
 							icon: 'warning',
 							showCancelButton: true,
-							confirmButtonColor: '#3085d6',
-							cancelButtonColor: '#d33',
-							confirmButtonText: 'Yes, delete it!',
+							confirmButtonColor: '#d33',
+							cancelButtonColor: '#3085d6',
+							confirmButtonText: 'Delete',
 						}).then((result) => {
 							if (result.isConfirmed) {
 								handleDeleteOrder(_id);

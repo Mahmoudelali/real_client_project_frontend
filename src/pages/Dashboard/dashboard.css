@@ -44,7 +44,7 @@
   flex-direction: column;
 }
 .btn {
-  all: unset !important;
+  all: unset !important;	
   cursor: pointer !important;
 }
 .none {
