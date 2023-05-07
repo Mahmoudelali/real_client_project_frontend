@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../Loader";
+import image1 from "../../images/jacket-preview.png"
 import "./SingleCategory.css";
 
-function Card({ title, price, description, image }) {
-  console.log(title, price, description, image);
+function Card({ title, price, description, imageUrl }) {
+  console.log(title, price, description, imageUrl);
   const [productsInCart, setProducts] = useState(
     JSON.parse(localStorage.getItem("shopping-cart")) || []
   );
@@ -23,7 +24,7 @@ function Card({ title, price, description, image }) {
 
   return (
     <div className="cards">
-      <img src={image} alt={title} className="cards-image" />
+      <img src={image1} alt={title} className="cards-image" />
       <div className="cards-content">
         <h2 className="cards-title">{title}</h2>
         <p className="cards-price">{price}$</p>
@@ -31,7 +32,7 @@ function Card({ title, price, description, image }) {
         <button
           className="cards-button"
           onClick={() =>
-            addProductToCart({ title, price, description, image })
+            addProductToCart({ title, price, description, imageUrl })
           }
         >
           Add to Cart
@@ -69,14 +70,13 @@ function Category() {
         <Loader />
       ) : (
         categoryData &&
-        categoryData.map((data) => (
+        categoryData.map((product) => (
           <Card
-            key={data.id}
-            title={data.title}
-            price={data.price}
-            $
-            description={data.description}
-            image={data.image}
+            key={product.id}
+            title={product.title}
+            price={product.price}
+            description={product.description}
+            imageUrl={product.imageUrl}
           />
         ))
       )}
