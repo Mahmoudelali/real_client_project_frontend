@@ -56,7 +56,11 @@
 .cards-button:hover {
   background-color: var(--accent);
 }
-
+.category-pagination-container{
+  display: flex;
+  justify-content: center;
+  
+}
 @media (max-width: 768px) {
   .cards {
     max-width: 100%;

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loader from "../Loader";
-import image1 from "../../images/jacket-preview.png"
+import image1 from "../../images/jacket-preview.png";
 import "./SingleCategory.css";
+import { Pagination } from "antd";
 
 function Card({ title, price, description, imageUrl }) {
   console.log(title, price, description, imageUrl);
@@ -46,13 +47,22 @@ function Category() {
   const { categoryId } = useParams();
   const [categoryData, setCategoryData] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalDocs, setTotalDocs] = useState(0);
+  const pageSize = 10; 
 
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${process.env.REACT_APP_URL}/products`);
+      const response = await axios.get(`${process.env.REACT_APP_URL}/products`, {
+        params: {
+          page: currentPage,
+          pageSize,
+        },
+      });
       console.log(response.data);
       setCategoryData(response.data.docs);
+      setTotalDocs(response.data.totalDocs);
       setLoading(false);
     } catch (error) {
       console.log("Error fetching category data:", error);
@@ -62,23 +72,36 @@ function Category() {
 
   useEffect(() => {
     fetchData();
-  }, [categoryId]);
+  }, [categoryId, currentPage]);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
   return (
     <div className="categoryy-container">
       {loading ? (
         <Loader />
       ) : (
-        categoryData &&
-        categoryData.map((product) => (
-          <Card
-            key={product.id}
-            title={product.title}
-            price={product.price}
-            description={product.description}
-            imageUrl={product.imageUrl}
-          />
-        ))
+        <>
+          {categoryData.map((product) => (
+            <Card
+              key={product.id}
+              title={product.title}
+              price={product.price}
+              description={product.description}
+              imageUrl={product.imageUrl}
+            />
+          ))}
+          <div className="category-pagination-container">
+            <Pagination
+              current={currentPage}
+              onChange={handlePageChange}
+              total={totalDocs}
+              pageSize={pageSize}
+            />
+          </div>
+        </>
       )}
     </div>
   );
