@@ -104,8 +104,11 @@ function HomeProductSection() {
       <div className="product-home-container">
         <h1 className="product-home-title">Products</h1>
         <Carousel responsive={responsive}>
-          {!product ? <Loader /> :
-            product.map((product) => (
+          {!product ? (
+            <Loader />
+          ) : (
+            product.length > 7 &&
+            product.slice(0,7).map((product) => (
               <div className="card">
                 {/* <Loader border={'2px dotted black'}  />  */}
                 <img
@@ -126,7 +129,8 @@ function HomeProductSection() {
                   </button>
                 </p>
               </div>
-            ))}
+            ))
+          )}
         </Carousel>
         ;
       </div>
