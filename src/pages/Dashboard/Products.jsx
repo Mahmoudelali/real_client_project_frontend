@@ -29,7 +29,7 @@ const Products = () => {
 
 	const nodeEnv = process.env.REACT_APP_URL;
 	const [products, setProducts] = useState(null);
-	// const [editViewExpanded, setEditViewExpanded] = useContext(windowExpand);
+
 	const [productData, setProductData] = useState({});
 	const [search, setSearch] = useState('');
 
@@ -54,23 +54,26 @@ const Products = () => {
 			) : (
 				<div>
 					<h2 className="title center">PRODUCTS</h2>
-					<form style={{ marginBottom: '10px' }}>
-						<input
-							placeholder="Search"
-							type="text"
-							className="input"
-							style={{
-								width: '20%',
-								display: 'block',
-								margin: '0 auto',
-							}}
-							onChange={(e) => {
-								setSearch(e.target.value);
-							}}
-						/>
-					</form>
+
 					<table>
 						<thead>
+							<tr>
+								<td style={{ padding: 0 }}>
+									<form style={{ marginBottom: '10px' }}>
+										<input
+											placeholder="Search"
+											type="text"
+											className="input"
+											style={{
+												display: 'block',
+											}}
+											onChange={(e) => {
+												setSearch(e.target.value);
+											}}
+										/>
+									</form>
+								</td>
+							</tr>
 							<tr>
 								{productTitles.map((title, index) => {
 									return (
@@ -141,27 +144,6 @@ const Products = () => {
 						</tbody>
 						<tfoot>
 							<tr>
-								<td
-									style={{
-										border: 0,
-									}}
-								>
-									<NavLink to={'/admin/dashboard/add'}>
-										<button
-											className="btn"
-											style={{
-												all: 'unset',
-												color: 'white',
-											}}
-										>
-											<Grid item xs={1}>
-												<AddIcon />
-											</Grid>
-											Add New Product
-										</button>
-									</NavLink>
-								</td>
-
 								<td colSpan={2} style={{ border: '0' }}>
 									<span>
 										<strong>Toatal</strong> :{' '}

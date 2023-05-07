@@ -73,7 +73,7 @@ const User = ({
 			)}
 
 			{!adminsView && <td>{_id}</td>}
-			<td>
+			<td style={{ color: '#dc3545' }}>
 				<button
 					className="delete-user delete-icon btn"
 					onClick={() => {
